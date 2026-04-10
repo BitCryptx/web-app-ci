@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment - Campus Tuck</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2E7D32;
+            --primary-light: #4CAF50;
+            --secondary: #FFC107;
+            --dark: #1B5E20;
+            --light: #F1F8E9;
+            --text: #333333;
+            --gray: #E0E0E0;
+            --white: #FFFFFF;
+            --error: #D32F2F;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+
+        .payment-card {
+            background-color: var(--white);
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .payment-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .payment-icon {
+            color: var(--primary);
+            font-size: 50px;
+            margin-bottom: 15px;
+        }
+
+        .payment-title {
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-size: 24px;
+        }
+
+        .order-reference {
+            margin-bottom: 20px;
+            font-size: 16px;
+            color: #555;
+        }
+
+        .payment-options {
+            margin: 25px 0;
+        }
+
+        .payment-option {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 15px;
+            border: 1px solid var(--gray);
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .payment-option:hover {
+            border-color: var(--primary-light);
+        }
+
+        .payment-option.selected {
+            border-color: var(--primary);
+            background-color: rgba(46, 125, 50, 0.05);
+        }
+
+        .payment-option input {
+            margin-right: 15px;
+        }
+
+        .payment-icon {
+            margin-right: 15px;
+            font-size: 24px;
+            color: var(--primary);
+        }
+
+        .payment-details {
+            margin-top: 15px;
+            padding: 20px;
+            background-color: var(--light);
+            border-radius: 5px;
+            border: 1px solid var(--gray);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--gray);
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .error-message {
+            color: var(--error);
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .btn {
+            background-color: var(--primary-light);
+            color: var(--white);
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .btn:hover {
+            background-color: var(--dark);
+        }
+
+        .btn:disabled {
+            background-color: var(--gray);
+            cursor: not-allowed;
+        }
+
+        .row {
+            display: flex;
+            gap: 15px;
+        }
+
+        .col {
+            flex: 1;
+        }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, .3);
+            border-radius: 50%;
+            border-top-color: var(--white);
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .no-order-message {
+            text-align: center;
+            padding: 20px;
+            background-color: #ffeeee;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .no-order-message a {
+            color: var(--primary);
+            text-decoration: underline;
+        }
+
+        .loading-message {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .success-message {
+            text-align: center;
+            padding: 20px;
+            background-color: #eeffee;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                margin: 20px auto;
+                padding: 10px;
+            }
+
+            .payment-card {
+                padding: 20px;
+            }
+
+            .row {
+                flex-direction: column;
+                gap: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="payment-card">
+            <div class="payment-header">
+                <div class="payment-icon">
+                    <i class="fas fa-credit-card"></i>
+                </div>
+                <h2 class="payment-title">Payment Details</h2>
+                <div class="order-reference">Order ID: <strong id="order-id">Loading...</strong></div>
+            </div>
+
+            <div id="payment-form-container">
+                <div class="payment-options">
+                    <div class="payment-option selected" id="card-option">
+                        <input type="radio" id="card" name="payment" value="card" checked>
+                        <i class="fas fa-credit-card payment-icon"></i>
+                        <label for="card">Credit/Debit Card</label>
+                    </div>
+                    <div class="payment-option" id="cash-option">
+                        <input type="radio" id="cash" name="payment" value="cash">
+                        <i class="fas fa-money-bill-wave payment-icon"></i>
+                        <label for="cash">Cash on Delivery</label>
+                    </div>
+                </div>
+
+                <div class="payment-details" id="card-details">
+                    <div class="form-group">
+                        <label for="card-number">Card Number</label>
+                        <input type="text" id="card-number" class="form-control" placeholder="1234 5678 9012 3456"
+                            maxlength="19">
+                        <div class="error-message" id="card-number-error">Please enter a valid 16-digit card number
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="card-name">Name on Card</label>
+                        <input type="text" id="card-name" class="form-control" placeholder="John Doe">
+                        <div class="error-message" id="card-name-error">Please enter the name on card</div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="card-expiry">Expiry Date</label>
+                                <input type="text" id="card-expiry" class="form-control" placeholder="MM/YY"
+                                    maxlength="5">
+                                <div class="error-message" id="card-expiry-error">Please enter a valid expiry date
+                                    (MM/YY)
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="card-cvv">CVV</label>
+                                <input type="password" id="card-cvv" class="form-control" placeholder="123"
+                                    maxlength="4">
+                                <div class="error-message" id="card-cvv-error">Please enter a valid CVV (3-4 digits)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="payment-details" id="cash-details" style="display: none;">
+                    <p>You'll pay with cash when your order is delivered.</p>
+                    <p>Please have the exact amount ready for the delivery person.</p>
+                </div>
+
+                <button id="submit-payment" class="btn" disabled>
+                    <i class="fas fa-lock"></i> Complete Payment
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Get order ID from URL or generate a random one
+            const urlParams = new URLSearchParams(window.location.search);
+            let orderId = urlParams.get('order_id');
+
+            // If no order ID in URL, generate a random one for demo purposes
+            if (!orderId) {
+                orderId = 'ORD-' + Math.floor(Math.random() * 1000000);
+                // Update the URL to include the order ID
+                const newUrl = window.location.pathname + '?order_id=' + orderId;
+                window.history.replaceState({}, '', newUrl);
+            }
+
+            // Payment method elements
+            const cashOption = document.getElementById('cash-option');
+            const cardOption = document.getElementById('card-option');
+            const cardDetails = document.getElementById('card-details');
+            const cashDetails = document.getElementById('cash-details');
+            const submitPaymentBtn = document.getElementById('submit-payment');
+            const paymentFormContainer = document.getElementById('payment-form-container');
+
+            // Display the order ID
+            document.getElementById('order-id').textContent = orderId;
+
+            // Mock function to process payment
+            async function processPayment(paymentMethod, cardDetails = null) {
+                try {
+                    // Get the actual order total from your system
+                    const orderResponse = await fetch(`/api/orders/${orderId}`);
+                    if (!orderResponse.ok) {
+                        throw new Error('Failed to fetch order details');
+                    }
+                    const orderData = await orderResponse.json();
+                    const orderTotal = orderData.total;
+
+                    const paymentData = {
+                        orderId: orderId,
+                        paymentMethod: paymentMethod,
+                        cardDetails: paymentMethod === 'card' ? {
+                            number: document.getElementById('card-number').value.replace(/\s+/g, ''),
+                            name: document.getElementById('card-name').value.trim(),
+                            expiry: document.getElementById('card-expiry').value,
+                            cvv: document.getElementById('card-cvv').value
+                        } : null,
+                        amount: orderTotal
+                    };
+
+                    console.log('Sending payment data:', paymentData); // Debug log
+
+                    const response = await fetch('/api/payments', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(paymentData)
+                    });
+
+                    const result = await response.json();
+
+                    if (!response.ok) {
+                        console.error('Payment failed:', result);
+                        throw new Error(result.error || 'Payment failed');
+                    }
+
+                    return result;
+
+                } catch (error) {
+                    console.error('Payment error:', error);
+
+                    // Show detailed error to user
+                    let errorMessage = error.message;
+                    if (error.message.includes('NetworkError')) {
+                        errorMessage = 'Network error. Please check your connection.';
+                    } else if (error.message.includes('Failed to fetch')) {
+                        errorMessage = 'Could not connect to the server.';
+                    }
+
+                    throw new Error(errorMessage);
+                }
+            }
+
+            // Enable payment button
+            submitPaymentBtn.disabled = false;
+
+            // Payment method selection
+            cashOption.addEventListener('click', function () {
+                document.getElementById('cash').checked = true;
+                cashOption.classList.add('selected');
+                cardOption.classList.remove('selected');
+                cardDetails.style.display = 'none';
+                cashDetails.style.display = 'block';
+                validateForm();
+            });
+
+            cardOption.addEventListener('click', function () {
+                document.getElementById('card').checked = true;
+                cardOption.classList.add('selected');
+                cashOption.classList.remove('selected');
+                cardDetails.style.display = 'block';
+                cashDetails.style.display = 'none';
+                validateForm();
+            });
+
+
+            // Card input formatting and validation
+            document.getElementById('card-number').addEventListener('input', function (e) {
+                let value = e.target.value.replace(/\s+/g, '');
+                if (value.length > 16) {
+                    value = value.substring(0, 16);
+                }
+                value = value.replace(/(\d{4})(?=\d)/g, '$1 ');
+                e.target.value = value.trim();
+                validateForm();
+            });
+
+            document.getElementById('card-expiry').addEventListener('input', function (e) {
+                let value = e.target.value.replace(/\D/g, '');
+                if (value.length > 4) {
+                    value = value.substring(0, 4);
+                }
+                if (value.length > 2) {
+                    value = value.substring(0, 2) + '/' + value.substring(2);
+                }
+                e.target.value = value;
+                validateForm();
+            });
+
+            document.getElementById('card-cvv').addEventListener('input', function (e) {
+                let value = e.target.value.replace(/\D/g, '');
+                if (value.length > 4) {
+                    value = value.substring(0, 4);
+                }
+                e.target.value = value;
+                validateForm();
+            });
+
+            // Form validation
+            function validateForm() {
+                const paymentMethod = document.querySelector('input[name="payment"]:checked').value;
+                let isValid = true;
+
+                if (paymentMethod === 'card') {
+                    // Validate card number (16 digits)
+                    const cardNumber = document.getElementById('card-number').value.replace(/\s+/g, '');
+                    if (cardNumber.length !== 16 || !/^\d+$/.test(cardNumber)) {
+                        document.getElementById('card-number-error').style.display = 'block';
+                        isValid = false;
+                    } else {
+                        document.getElementById('card-number-error').style.display = 'none';
+                    }
+
+                    // Validate card name
+                    const cardName = document.getElementById('card-name').value.trim();
+                    if (cardName.length < 3) {
+                        document.getElementById('card-name-error').style.display = 'block';
+                        isValid = false;
+                    } else {
+                        document.getElementById('card-name-error').style.display = 'none';
+                    }
+
+                    // Validate expiry date (MM/YY format)
+                    const expiry = document.getElementById('card-expiry').value;
+                    if (!/^\d{2}\/\d{2}$/.test(expiry)) {
+                        document.getElementById('card-expiry-error').style.display = 'block';
+                        isValid = false;
+                    } else {
+                        document.getElementById('card-expiry-error').style.display = 'none';
+                    }
+
+                    // Validate CVV (3-4 digits)
+                    const cvv = document.getElementById('card-cvv').value;
+                    if (cvv.length < 3 || cvv.length > 4 || !/^\d+$/.test(cvv)) {
+                        document.getElementById('card-cvv-error').style.display = 'block';
+                        isValid = false;
+                    } else {
+                        document.getElementById('card-cvv-error').style.display = 'none';
+                    }
+                }
+
+                submitPaymentBtn.disabled = !isValid;
+                return isValid;
+            }
+
+            // Add input event listeners for validation
+            document.getElementById('card-number').addEventListener('input', validateForm);
+            document.getElementById('card-name').addEventListener('input', validateForm);
+            document.getElementById('card-expiry').addEventListener('input', validateForm);
+            document.getElementById('card-cvv').addEventListener('input', validateForm);
+
+            // Payment submission
+            submitPaymentBtn.addEventListener('click', async function () {
+                if (!validateForm()) return;
+
+                const paymentMethod = document.querySelector('input[name="payment"]:checked').value;
+                const btnText = submitPaymentBtn.innerHTML;
+
+                // Show loading state
+                submitPaymentBtn.disabled = true;
+                submitPaymentBtn.innerHTML = '<span class="loading"></span> Processing Payment...';
+
+                try {
+                    const result = await processPayment(paymentMethod);
+
+                    // Show success message
+                    paymentFormContainer.innerHTML = `
+            <div class="success-message">
+                <h3><i class="fas fa-check-circle"></i> Payment Successful!</h3>
+                <p>Your order #${orderId} has been confirmed.</p>
+                <p>Payment ID: ${result.paymentId}</p>
+                <p>Amount Paid: $${(result.amount / 100).toFixed(2)}</p>
+                <p>You will receive your order shortly.</p>
+                <a href="/order-confirmation.html?order_id=${orderId}" class="btn" style="margin-top: 20px;">
+                    View Order Details
+                </a>
+            </div>
+        `;
+
+                } catch (error) {
+                    // Show error message
+                    const errorElement = document.createElement('div');
+                    errorElement.className = 'error-message';
+                    errorElement.style.margin = '10px 0';
+                    errorElement.style.padding = '10px';
+                    errorElement.style.backgroundColor = '#ffeeee';
+                    errorElement.innerHTML = `
+            <h3><i class="fas fa-exclamation-circle"></i> Payment Failed</h3>
+            <p>${error.message}</p>
+            <button onclick="window.location.reload()" class="btn" style="margin-top: 10px;">
+                Try Again
+            </button>
+        `;
+
+                    paymentFormContainer.insertBefore(errorElement, submitPaymentBtn);
+                    submitPaymentBtn.disabled = false;
+                    submitPaymentBtn.innerHTML = btnText;
+                }
+            });
+            // Initial form validation
+            validateForm();
+        });
+    </script>
+</body>
+
+</html>

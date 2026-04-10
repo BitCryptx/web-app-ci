@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Tuck - Your Student Essentials Store</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2E7D32;
+            --primary-light: #4CAF50;
+            --secondary: #FFC107;
+            --dark: #1B5E20;
+            --light: #F1F8E9;
+            --text: #333333;
+            --gray: #E0E0E0;
+            --white: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #f9f9f9;
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Pacifico', cursive;
+            font-size: 28px;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.03);
+        }
+
+        .logo i {
+            margin-right: 10px;
+            color: var(--primary-light);
+            font-size: 24px;
+        }
+
+        /* Navigation Menu */
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-item {
+            margin-left: 25px;
+            position: relative;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            padding: 8px 0;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-light);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-light);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link i {
+            margin-right: 8px;
+            font-size: 18px;
+        }
+
+        /* Dropdown Menu */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: var(--white);
+            min-width: 220px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            z-index: 1;
+            top: 100%;
+            left: 0;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            padding: 12px 20px;
+            text-decoration: none;
+            display: block;
+            color: var(--text);
+            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-item:hover {
+            background-color: var(--light);
+            color: var(--primary-light);
+            padding-left: 25px;
+        }
+
+        .dropdown-item i {
+            margin-right: 10px;
+            color: var(--primary-light);
+        }
+
+        /* Auth Buttons */
+        .auth-buttons {
+            display: flex;
+            align-items: center;
+        }
+
+        .auth-btn {
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-weight: 500;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            margin-left: 15px;
+        }
+
+        .auth-btn i {
+            margin-right: 8px;
+            font-size: 16px;
+        }
+
+        .btn-outline {
+            border: 2px solid var(--primary-light);
+            color: var(--primary-light);
+            background: transparent;
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary-light);
+            color: var(--white);
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
+        }
+
+        .btn-solid {
+            background-color: var(--primary-light);
+            color: var(--white);
+            border: 2px solid var(--primary-light);
+        }
+
+        .btn-solid:hover {
+            background-color: var(--dark);
+            border-color: var(--dark);
+            box-shadow: 0 5px 15px rgba(46, 125, 50, 0.3);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1606787366850-de6330128bfc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(transparent, #f9f9f9);
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 0 20px;
+            transform: translateY(20px);
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .hero-btn {
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: 500;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-btn i {
+            margin-right: 8px;
+        }
+
+        .hero-btn-primary {
+            background-color: var(--primary-light);
+            color: var(--white);
+            border: 2px solid var(--primary-light);
+        }
+
+        .hero-btn-primary:hover {
+            background-color: var(--dark);
+            border-color: var(--dark);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero-btn-secondary {
+            background-color: transparent;
+            color: var(--white);
+            border: 2px solid var(--white);
+        }
+
+        .hero-btn-secondary:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Categories Section */
+        .section {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 36px;
+            color: var(--primary);
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--primary-light);
+            border-radius: 3px;
+        }
+
+        .section-title p {
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 18px;
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .category-card {
+            background-color: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.4s ease;
+            text-decoration: none;
+            color: var(--text);
+            position: relative;
+        }
+
+        .category-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .category-img {
+            height: 180px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .category-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .category-card:hover .category-img img {
+            transform: scale(1.1);
+        }
+
+        .category-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.5));
+        }
+
+        .category-info {
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .category-info h3 {
+            margin-bottom: 10px;
+            font-size: 20px;
+            color: var(--primary);
+            transition: color 0.3s ease;
+        }
+
+        .category-card:hover .category-info h3 {
+            color: var(--primary-light);
+        }
+
+        .category-info p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: var(--white);
+            padding: 60px 20px 30px;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+        }
+
+        .footer-col h3 {
+            font-size: 20px;
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--primary-light);
+        }
+
+        .footer-about .logo {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: var(--white);
+        }
+
+        .footer-about p {
+            margin-bottom: 20px;
+            opacity: 0.8;
+            font-size: 14px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: var(--white);
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background-color: var(--primary-light);
+            transform: translateY(-3px);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 15px;
+        }
+
+        .footer-links a {
+            color: var(--white);
+            opacity: 0.8;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+            padding-left: 5px;
+        }
+
+        .footer-links a i {
+            margin-right: 10px;
+            font-size: 14px;
+        }
+
+        .footer-contact p {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            opacity: 0.8;
+            font-size: 14px;
+        }
+
+        .footer-contact p i {
+            margin-right: 10px;
+            color: var(--primary-light);
+            font-size: 16px;
+            width: 20px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            margin-top: 50px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.7;
+            font-size: 14px;
+        }
+
+        /* Login Modals */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1001;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: var(--white);
+            border-radius: 10px;
+            width: 100%;
+            max-width: 400px;
+            overflow: hidden;
+            transform: scale(0.9);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+        .modal.show .modal-content {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .modal-header {
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .modal-header h2 {
+            font-size: 24px;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 24px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .close-modal:hover {
+            transform: rotate(90deg);
+        }
+
+        .modal-body {
+            padding: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--gray);
+            border-radius: 5px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-light);
+            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--primary-light);
+            color: var(--white);
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .submit-btn:hover {
+            background-color: var(--dark);
+        }
+
+        .form-footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+
+        .form-footer a {
+            color: var(--primary-light);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .nav-container {
+                flex-direction: column;
+            }
+
+            .logo {
+                margin-bottom: 15px;
+            }
+
+            .nav-menu {
+                margin-bottom: 15px;
+            }
+
+            .auth-buttons {
+                margin-top: 15px;
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .nav-item {
+                margin: 5px 10px;
+            }
+
+            .hero {
+                height: 400px;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .hero-btn {
+                width: 100%;
+                max-width: 250px;
+                margin-bottom: 10px;
+            }
+
+            .footer-container {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero {
+                height: 350px;
+                background-attachment: scroll;
+            }
+
+            .hero h1 {
+                font-size: 28px;
+            }
+
+            .section-title h2 {
+                font-size: 28px;
+            }
+
+            .category-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <i class="fas fa-store"></i>
+                Campus Tuck
+            </a>
+
+            <ul class="nav-menu">
+                <li class="nav-item dropdown">
+                    <a href="source code/html + css/products.html" class="nav-link">
+                        <i class="fas fa-bars"></i>
+                        Products
+                    </a>
+                    <div class="dropdown-content">
+                        <a href="source code/html + css/products.html" class="dropdown-item">
+                            <i class="fas fa-cookie-bite"></i>
+                            Snacks & Chips
+                        </a>
+                        <a href="source code/html + css/products.html" class="dropdown-item">
+                            <i class="fas fa-wine-bottle"></i>
+                            Beverages
+                        </a>
+                        <a href="source code/html + css/products.html" class="dropdown-item">
+                            <i class="fas fa-candy-cane"></i>
+                            Chocolate
+                        </a>
+                        <a href="source code/html + css/products.html" class="dropdown-item">
+                            <i class="fas fa-candy-cane"></i>
+                            Stationery
+                        </a>
+                        <a href="source code/html + css/products.html" class="dropdown-item">
+                            <i class="fas fa-box-open"></i>
+                            View All
+                        </a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="source code/html + css/products.html" class="nav-link">
+                        <i class="fas fa-fire"></i>
+                        Special Offers
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="source code/html + css/aboutus.html" class="nav-link">
+                        <i class="fas fa-info-circle"></i>
+                        About Us
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="source code/html + css/contact.html" class="nav-link">
+                        <i class="fas fa-phone"></i>
+                        Contact
+                    </a>
+                </li>
+            </ul>
+
+            <div class="auth-buttons">
+                <button class="auth-btn btn-outline" onclick="window.location.href='source code/html + css/user.html'">
+                    <i class="fas fa-user"></i>
+                    User Login
+                </button>
+                <button class="auth-btn btn-solid"
+                    onclick="window.location.href='source code/html + css/adminlogin.html'">
+                    <i class="fas fa-user-shield"></i>
+                    Admin
+                </button>
+            </div>
+
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Your Campus Essentials Store</h1>
+            <p>Get all your snacks, drinks, and daily necessities at affordable prices with quick service right on
+                campus.</p>
+            <div class="hero-buttons">
+                <a href="source code/html + css/products.html" style="text-decoration: none;">
+                    <button class="hero-btn hero-btn-primary">
+                        <i class="fas fa-shopping-bag"></i>
+                        Shop Now
+                    </button>
+                </a>
+                <a href="source code/html + css/aboutus.html" style="text-decoration: none;">
+                    <button class="hero-btn hero-btn-secondary">
+                        <i class="fas fa-map-marker-alt"></i>
+                        Find Us
+                    </button>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="section">
+        <div class="section-title">
+            <h2>Our Product Categories</h2>
+            <p>Browse through our wide selection of products tailored for campus life</p>
+        </div>
+
+        <div class="category-grid">
+            <a href="source code/html + css/products.html" class="category-card">
+                <div class="category-img">
+                    <img src="products/snack&Chips.jpg" alt="Snacks">
+                    <div class="category-overlay"></div>
+                </div>
+                <div class="category-info">
+                    <h3>Snacks & Chips</h3>
+                    <p>All your favorite munchies for study breaks</p>
+                </div>
+            </a>
+
+            <a href="source code/html + css/products.html" class="category-card">
+                <div class="category-img">
+                    <img src="products/pngegg.png" alt="Beverages">
+                    <div class="category-overlay"></div>
+                </div>
+                <div class="category-info">
+                    <h3>Beverages</h3>
+                    <p>Cold drinks, juices, and energy boosters</p>
+                </div>
+            </a>
+
+            <a href="source code/html + css/products.html" class="category-card">
+                <div class="category-img">
+                    <img src="https://images.unsplash.com/photo-1603532648955-039310d9ed75?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80"
+                        alt="Confectionery">
+                    <div class="category-overlay"></div>
+                </div>
+                <div class="category-info">
+                    <h3>Chocolate</h3>
+                    <p>Sweet treats to satisfy your cravings</p>
+                </div>
+            </a>
+
+            <a href="source code/html + css/products.html" class="category-card">
+                <div class="category-img">
+                    <img src="https://images.unsplash.com/photo-1585336261022-680e295ce3fe?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+                        alt="Stationery">
+                    <div class="category-overlay"></div>
+                </div>
+                <div class="category-info">
+                    <h3>Stationery</h3>
+                    <p>Essential academic supplies</p>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-col footer-about">
+                <div class="logo">
+                    <i class="fas fa-store"></i>
+                    Campus Tuck
+                </div>
+                <p>Your one-stop shop for all campus essentials, providing quality products with quick service to the
+                    student community.</p>
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="source code/html + css/index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+                    <li><a href="source code/html + css/products.html"><i class="fas fa-chevron-right"></i> Products</a>
+                    </li>
+                    <li><a href="source code/html + css/products.html"><i class="fas fa-chevron-right"></i> Special
+                            Offers</a></li>
+                    <li><a href="source code/html + css/aboutus.html"><i class="fas fa-chevron-right"></i> About Us</a>
+                    </li>
+                    <li><a href="source code/html + css/contact.html"><i class="fas fa-chevron-right"></i> Contact</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h3>Categories</h3>
+                <ul class="footer-links">
+                    <li><a href="source code/html + css/products.html"><i class="fas fa-chevron-right"></i> Snacks &
+                            Chips</a></li>
+                    <li><a href="source code/html + css/products.html"><i class="fas fa-chevron-right"></i>
+                            Beverages</a></li>
+                    <li><a href="source code/html + css/products.html"><i class="fas fa-chevron-right"></i>
+                            Chocolate</a></li>
+                    <li><a href="source code/html + css/products.html"><i class="fas fa-chevron-right"></i>
+                            Stationery</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col footer-contact">
+                <h3>Contact Us</h3>
+                <p><i class="fas fa-map-marker-alt"></i> Campus Building A, Room 101</p>
+                <p><i class="fas fa-phone"></i> 03151622934</p>
+                <p><i class="fas fa-envelope"></i> info@campustuck.edu</p>
+                <p><i class="fas fa-clock"></i> Mon-Fri: 8AM-8PM</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            &copy; 2025 Campus Tuck. All rights reserved.
+        </div>
+    </footer>
+
+    <!-- User Login Modal -->
+    <div id="user-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close-modal" onclick="closeModal('user-modal')">&times;</span>
+                <h2><i class="fas fa-user"></i> User Login</h2>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="user-email">Student ID</label>
+                        <input type="text" id="user-email" class="form-control" placeholder="Enter your student ID">
+                    </div>
+                    <div class="form-group">
+                        <label for="user-password">Password</label>
+                        <input type="password" id="user-password" class="form-control"
+                            placeholder="Enter your password">
+                    </div>
+                    <button type="submit" class="submit-btn">Login</button>
+                    <div class="form-footer">
+                        Don't have an account? <a href="#">Register here</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Login Modal -->
+    <div id="admin-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close-modal" onclick="closeModal('admin-modal')">&times;</span>
+                <h2><i class="fas fa-user-shield"></i> Admin Login</h2>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="admin-email">Admin ID</label>
+                        <input type="text" id="admin-email" class="form-control" placeholder="Enter your admin ID">
+                    </div>
+                    <div class="form-group">
+                        <label for="admin-password">Password</label>
+                        <input type="password" id="admin-password" class="form-control"
+                            placeholder="Enter your password">
+                    </div>
+                    <button type="submit" class="submit-btn">Login</button>
+                    <div class="form-footer">
+                        Forgot password? <a href="#">Reset here</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Modal functions
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('show');
+            document.body.style.overflow = 'auto';
+        }
+
+        window.onclick = function (event) {
+            if (event.target.className === 'modal') {
+                event.target.classList.remove('show');
+                document.body.style.overflow = 'auto';
+            }
+        };
+
+        // Animation for category cards
+        document.addEventListener('DOMContentLoaded', function () {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.category-card').forEach(card => {
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
+
+</html>

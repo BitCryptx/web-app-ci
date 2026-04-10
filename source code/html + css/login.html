@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Login - Campus Tuck</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2E7D32;
+            --primary-light: #4CAF50;
+            --secondary: #FFC107;
+            --dark: #1B5E20;
+            --light: #F1F8E9;
+            --text: #333333;
+            --gray: #E0E0E0;
+            --white: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #f9f9f9;
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Pacifico', cursive;
+            font-size: 28px;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.03);
+        }
+
+        .logo i {
+            margin-right: 10px;
+            color: var(--primary-light);
+            font-size: 24px;
+        }
+
+        /* Navigation Menu */
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-item {
+            margin-left: 25px;
+            position: relative;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            padding: 8px 0;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-light);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-light);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link.active {
+            color: var(--primary-light);
+            font-weight: 600;
+        }
+
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .nav-link i {
+            margin-right: 8px;
+            font-size: 18px;
+        }
+
+        /* Auth Buttons */
+        .auth-buttons {
+            display: flex;
+            align-items: center;
+        }
+
+        .auth-btn {
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-weight: 500;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            margin-left: 15px;
+        }
+
+        .auth-btn i {
+            margin-right: 8px;
+            font-size: 16px;
+        }
+
+        .btn-outline {
+            border: 2px solid var(--primary-light);
+            color: var(--primary-light);
+            background: transparent;
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary-light);
+            color: var(--white);
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
+        }
+
+        .btn-solid {
+            background-color: var(--primary-light);
+            color: var(--white);
+            border: 2px solid var(--primary-light);
+        }
+
+        .btn-solid:hover {
+            background-color: var(--dark);
+            border-color: var(--dark);
+            box-shadow: 0 5px 15px rgba(46, 125, 50, 0.3);
+        }
+
+        /* Login Hero */
+        .login-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+            margin-bottom: 60px;
+        }
+
+        .login-hero h1 {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        .login-hero p {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+
+        /* Login Section */
+        .login-section {
+            max-width: 500px;
+            margin: 0 auto 80px;
+            padding: 0 20px;
+        }
+
+        .login-container {
+            background-color: var(--white);
+            border-radius: 10px;
+            padding: 40px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .login-container h2 {
+            font-size: 28px;
+            margin-bottom: 30px;
+            color: var(--primary);
+            text-align: center;
+            position: relative;
+        }
+
+        .login-container h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 3px;
+            background-color: var(--primary-light);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--gray);
+            border-radius: 5px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-light);
+            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+        }
+
+        .remember-forgot {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+        }
+
+        .remember-me input {
+            margin-right: 8px;
+        }
+
+        .forgot-password {
+            color: var(--primary-light);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .forgot-password:hover {
+            color: var(--dark);
+            text-decoration: underline;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 14px;
+            background-color: var(--primary-light);
+            color: var(--white);
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        .login-btn:hover {
+            background-color: var(--dark);
+        }
+
+        .login-btn i {
+            margin-right: 8px;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 20px 0;
+            color: #777;
+            font-size: 14px;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1px solid var(--gray);
+        }
+
+        .divider::before {
+            margin-right: 10px;
+        }
+
+        .divider::after {
+            margin-left: 10px;
+        }
+
+        .social-login {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .social-btn {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 18px;
+            transition: all 0.3s ease;
+        }
+
+        .social-btn.facebook {
+            background-color: #3b5998;
+        }
+
+        .social-btn.google {
+            background-color: #db4437;
+        }
+
+        .social-btn.twitter {
+            background-color: #1da1f2;
+        }
+
+        .social-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .register-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .register-link a {
+            color: var(--primary-light);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .register-link a:hover {
+            color: var(--dark);
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 60px 20px 30px;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+        }
+
+        .footer-col h3 {
+            font-size: 20px;
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--primary-light);
+        }
+
+        .footer-about .logo {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: var(--white);
+        }
+
+        .footer-about p {
+            margin-bottom: 20px;
+            opacity: 0.8;
+            font-size: 14px;
+        }
+
+        .footer-social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .footer-social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: var(--white);
+            transition: all 0.3s ease;
+        }
+
+        .footer-social-link:hover {
+            background-color: var(--primary-light);
+            transform: translateY(-3px);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 15px;
+        }
+
+        .footer-links a {
+            color: var(--white);
+            opacity: 0.8;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+            padding-left: 5px;
+        }
+
+        .footer-links a i {
+            margin-right: 10px;
+            font-size: 14px;
+        }
+
+        .footer-contact p {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            opacity: 0.8;
+            font-size: 14px;
+        }
+
+        .footer-contact p i {
+            margin-right: 10px;
+            color: var(--primary-light);
+            font-size: 16px;
+            width: 20px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            margin-top: 50px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.7;
+            font-size: 14px;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .nav-container {
+                flex-direction: column;
+            }
+
+            .logo {
+                margin-bottom: 15px;
+            }
+
+            .nav-menu {
+                margin-bottom: 15px;
+            }
+
+            .auth-buttons {
+                margin-top: 15px;
+            }
+
+            .login-hero h1 {
+                font-size: 36px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .nav-item {
+                margin: 5px 10px;
+            }
+
+            .login-hero {
+                height: 250px;
+            }
+
+            .login-hero h1 {
+                font-size: 32px;
+            }
+
+            .login-container {
+                padding: 30px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .login-hero {
+                height: 200px;
+            }
+
+            .login-hero h1 {
+                font-size: 28px;
+            }
+
+            .login-container {
+                padding: 25px 20px;
+            }
+
+            .remember-forgot {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-store"></i>
+                Campus Tuck
+            </a>
+
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="../../index.html" class="nav-link">
+                        <i class="fas fa-home"></i>
+                        Home
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="products" class="nav-link">
+                        <i class="fas fa-bars"></i>
+                        Products
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="products.html" class="nav-link">
+                        <i class="fas fa-fire"></i>
+                        Special Offers
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="contact.html" class="nav-link">
+                        <i class="fas fa-phone"></i>
+                        Contact
+                    </a>
+                </li>
+            </ul>
+
+            <div class="auth-buttons">
+                <button class="auth-btn btn-outline active">
+                    <i class="fas fa-user"></i>
+                    User Login
+                </button>
+                <button class="auth-btn btn-solid" onclick="window.location.href='admin-login.html'">
+                    <i class="fas fa-user-shield"></i>
+                    Admin
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Login Hero -->
+    <section class="login-hero">
+        <div>
+            <h1>Welcome Back!</h1>
+            <p>Sign in to access your Campus Tuck account and continue shopping</p>
+        </div>
+    </section>
+
+    <!-- Login Section -->
+    <div class="login-section">
+        <div class="login-container">
+            <h2>User Login</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" class="form-control" placeholder="Enter your email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" class="form-control" placeholder="Enter your password"
+                        required>
+                </div>
+
+                <div class="remember-forgot">
+                    <div class="remember-me">
+                        <input type="checkbox" id="remember">
+                        <label for="remember">Remember me</label>
+                    </div>
+                    <a href="user.html" class="forgot-password">Forgot password?</a>
+                </div>
+
+                <button type="submit" class="login-btn">
+                    <i class="fas fa-sign-in-alt"></i> Login
+                </button>
+
+                <div class="divider">
+                    Or login with
+                </div>
+
+                <div class="social-login">
+                    <a href="#" class="social-btn facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="social-btn google">
+                        <i class="fab fa-google"></i>
+                    </a>
+                    <a href="#" class="social-btn twitter">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                </div>
+
+                <div class="register-link">
+                    Don't have an account? <a href="user.html">Register here</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-col footer-about">
+                <div class="logo">
+                    <i class="fas fa-store"></i>
+                    Campus Tuck
+                </div>
+                <p>Your one-stop shop for all campus essentials, providing quality products with quick service to the
+                    student community.</p>
+                <div class="footer-social-links">
+                    <a href="#" class="footer-social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="footer-social-link"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="footer-social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="footer-social-link"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="../../index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+                    <li><a href="products"><i class="fas fa-chevron-right"></i> Products</a></li>
+                    <li><a href="products.html"><i class="fas fa-chevron-right"></i> Special Offers</a></li>
+                    <li><a href="contact.html"><i class="fas fa-chevron-right"></i> Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h3>Categories</h3>
+                <ul class="footer-links">
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Snacks & Chips</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Beverages</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Chocolate/a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col footer-contact">
+                <h3>Contact Us</h3>
+                <p><i class="fas fa-map-marker-alt"></i> Campus Building A, Room 101</p>
+                <p><i class="fas fa-phone"></i> 03151622934</p>
+                <p><i class="fas fa-envelope"></i> info@campustuck.edu</p>
+                <p><i class="fas fa-clock"></i> Mon-Fri: 8AM-8PM</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            &copy; 2025 Campus Tuck. All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+        // Form submission
+        document.getElementById('loginForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // Get form values
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const remember = document.getElementById('remember').checked;
+
+            // Simple validation
+            if (!email || !password) {
+                alert('Please fill in all fields');
+                return;
+            }
+
+            // Here you would typically send the data to your server
+            // For demo purposes, we'll just show a success message
+            alert('Login successful! Redirecting...');
+
+            // Redirect after login (in a real app, you'd check credentials first)
+            window.location.href = 'index.html';
+        });
+    </script>
+</body>
+
+</html>

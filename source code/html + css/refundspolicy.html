@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Refund Policy - Campus Tuck</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2E7D32;
+            --primary-light: #4CAF50;
+            --secondary: #FFC107;
+            --dark: #1B5E20;
+            --light: #F1F8E9;
+            --text: #333333;
+            --gray: #E0E0E0;
+            --white: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #f9f9f9;
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Pacifico', cursive;
+            font-size: 28px;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.03);
+        }
+
+        .logo i {
+            margin-right: 10px;
+            color: var(--primary-light);
+            font-size: 24px;
+        }
+
+        /* Navigation Menu */
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-item {
+            margin-left: 25px;
+            position: relative;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            padding: 8px 0;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-light);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-light);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link i {
+            margin-right: 8px;
+            font-size: 18px;
+        }
+
+        /* Auth Buttons */
+        .auth-buttons {
+            display: flex;
+            align-items: center;
+        }
+
+        .auth-btn {
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-weight: 500;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            margin-left: 15px;
+        }
+
+        .auth-btn i {
+            margin-right: 8px;
+            font-size: 16px;
+        }
+
+        .btn-outline {
+            border: 2px solid var(--primary-light);
+            color: var(--primary-light);
+            background: transparent;
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary-light);
+            color: var(--white);
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
+        }
+
+        .btn-solid {
+            background-color: var(--primary-light);
+            color: var(--white);
+            border: 2px solid var(--primary-light);
+        }
+
+        .btn-solid:hover {
+            background-color: var(--dark);
+            border-color: var(--dark);
+            box-shadow: 0 5px 15px rgba(46, 125, 50, 0.3);
+        }
+
+        /* Refund Content */
+        .refund-container {
+            max-width: 1000px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+
+        .refund-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .refund-header h1 {
+            font-size: 36px;
+            color: var(--primary);
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .refund-header h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--primary-light);
+            border-radius: 3px;
+        }
+
+        .refund-header p {
+            color: #666;
+            font-size: 16px;
+        }
+
+        .refund-content {
+            background-color: var(--white);
+            border-radius: 10px;
+            padding: 40px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .refund-section {
+            margin-bottom: 30px;
+        }
+
+        .refund-section h2 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 22px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .refund-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--primary-light);
+        }
+
+        .refund-section p,
+        .refund-section ul {
+            margin-bottom: 15px;
+            color: #555;
+            font-size: 15px;
+        }
+
+        .refund-section ul {
+            padding-left: 20px;
+        }
+
+        .refund-section li {
+            margin-bottom: 8px;
+        }
+
+        .highlight {
+            background-color: rgba(76, 175, 80, 0.1);
+            padding: 15px;
+            border-left: 3px solid var(--primary-light);
+            margin: 20px 0;
+            border-radius: 0 5px 5px 0;
+        }
+
+        .process-steps {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .process-step {
+            flex: 1;
+            min-width: 200px;
+            background-color: var(--light);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+            position: relative;
+        }
+
+        .step-number {
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            background-color: var(--primary-light);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .process-step h3 {
+            color: var(--primary);
+            margin-bottom: 10px;
+            margin-top: 10px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: var(--white);
+            padding: 60px 20px 30px;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+        }
+
+        .footer-col h3 {
+            font-size: 20px;
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--primary-light);
+        }
+
+        .footer-about .logo {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: var(--white);
+        }
+
+        .footer-about p {
+            margin-bottom: 20px;
+            opacity: 0.8;
+            font-size: 14px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: var(--white);
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background-color: var(--primary-light);
+            transform: translateY(-3px);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 15px;
+        }
+
+        .footer-links a {
+            color: var(--white);
+            opacity: 0.8;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+            padding-left: 5px;
+        }
+
+        .footer-links a i {
+            margin-right: 10px;
+            font-size: 14px;
+        }
+
+        .footer-contact p {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            opacity: 0.8;
+            font-size: 14px;
+        }
+
+        .footer-contact p i {
+            margin-right: 10px;
+            color: var(--primary-light);
+            font-size: 16px;
+            width: 20px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            margin-top: 50px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.7;
+            font-size: 14px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .refund-header h1 {
+                font-size: 28px;
+            }
+
+            .refund-content {
+                padding: 25px;
+            }
+
+            .refund-section h2 {
+                font-size: 20px;
+            }
+
+            .process-steps {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .refund-header h1 {
+                font-size: 24px;
+            }
+
+            .refund-content {
+                padding: 20px;
+            }
+
+            .nav-menu {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .nav-item {
+                margin: 5px 10px;
+            }
+
+            .auth-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .auth-btn {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="nav-container">
+            <a href="../../index.html" class="logo">
+                <i class="fas fa-store"></i>
+                Campus Tuck
+            </a>
+
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="products.html" class="nav-link">
+                        <i class="fas fa-bars"></i>
+                        Products
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="products.html" class="nav-link">
+                        <i class="fas fa-fire"></i>
+                        Special Offers
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="aboutus.html" class="nav-link">
+                        <i class="fas fa-info-circle"></i>
+                        About Us
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="contact.html" class="nav-link">
+                        <i class="fas fa-phone"></i>
+                        Contact
+                    </a>
+                </li>
+            </ul>
+
+            <div class="auth-buttons">
+                <button class="auth-btn btn-outline" onclick="window.location.href='user.html'">
+                    <i class="fas fa-user"></i>
+                    User Login
+                </button>
+                <button class="auth-btn btn-solid" onclick="window.location.href='adminlogin.html'">
+                    <i class="fas fa-user-shield"></i>
+                    Admin
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Refund Content -->
+    <div class="refund-container">
+        <div class="refund-header">
+            <h1>Refund Policy</h1>
+            <p>Last Updated: June 16, 2025</p>
+        </div>
+
+        <div class="refund-content">
+            <div class="refund-section">
+                <h2>Our Refund Policy</h2>
+                <p>At Campus Tuck, we strive to provide high-quality products and excellent service to our campus
+                    community. If you're not completely satisfied with your purchase, we're here to help. Please review
+                    our refund policy below to understand your options.</p>
+
+                <div class="highlight">
+                    <p><strong>Important:</strong> Refunds are only available for eligible items with proof of purchase
+                        (receipt) within the specified time frame.</p>
+                </div>
+            </div>
+
+            <div class="refund-section">
+                <h2>Eligibility for Refunds</h2>
+                <p>You may be eligible for a refund or exchange if:</p>
+                <ul>
+                    <li>You received a damaged or defective product</li>
+                    <li>You received the wrong item</li>
+                    <li>The product doesn't match its description (for non-perishable items only)</li>
+                </ul>
+                <p>To be eligible for a refund, you must:</p>
+                <ul>
+                    <li>Present your original receipt or order confirmation</li>
+                    <li>Return the item within 24 hours of purchase</li>
+                    <li>Return the item in its original packaging (when applicable)</li>
+                </ul>
+            </div>
+
+            <div class="refund-section">
+                <h2>Non-Refundable Items</h2>
+                <p>The following items are <strong>not eligible</strong> for refunds:</p>
+                <ul>
+                    <li>Perishable goods (food items, beverages, etc.)</li>
+                    <li>Opened or partially consumed products</li>
+                    <li>Gift cards or prepaid meal plans</li>
+                    <li>Items purchased on final sale or clearance</li>
+                    <li>Personal hygiene products (when opened)</li>
+                </ul>
+            </div>
+
+            <div class="refund-section">
+                <h2>Refund Process</h2>
+                <p>Here's how our refund process works:</p>
+
+                <div class="process-steps">
+                    <div class="process-step">
+                        <div class="step-number">1</div>
+                        <h3>Contact Us</h3>
+                        <p>Visit our store or contact us within 24 hours of your purchase to initiate a refund request.
+                        </p>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-number">2</div>
+                        <h3>Return Item</h3>
+                        <p>Bring the item and your receipt to our store for inspection by our staff.</p>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-number">3</div>
+                        <h3>Approval</h3>
+                        <p>Our team will verify the issue and approve eligible refunds.</p>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-number">4</div>
+                        <h3>Refund Issued</h3>
+                        <p>Refunds are processed to your original payment method within 5-7 business days.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="refund-section">
+                <h2>Refund Methods</h2>
+                <p>Refunds will be issued using the original payment method:</p>
+                <ul>
+                    <li><strong>Cash purchases:</strong> Refunded in cash</li>
+                    <li><strong>Campus meal cards:</strong> Credit applied to your card</li>
+                    <li><strong>Credit/Debit cards:</strong> Refunded to original card</li>
+                    <li><strong>Mobile payments:</strong> Refunded to original account</li>
+                </ul>
+                <p>Please allow 5-7 business days for the refund to appear in your account.</p>
+            </div>
+
+            <div class="refund-section">
+                <h2>Late or Missing Refunds</h2>
+                <p>If you haven't received your refund after 7 business days:</p>
+                <ul>
+                    <li>Check with your bank or payment provider first</li>
+                    <li>Contact your credit card company as processing times vary</li>
+                    <li>If you've done these steps and still haven't received your refund, contact us at
+                        refunds@campustuck.edu</li>
+                </ul>
+            </div>
+
+            <div class="refund-section">
+                <h2>Exchanges</h2>
+                <p>We're happy to exchange eligible items for:</p>
+                <ul>
+                    <li>The same product in a different size or color (when available)</li>
+                    <li>A product of equal value</li>
+                    <li>Store credit when an exact replacement isn't available</li>
+                </ul>
+                <p>Exchanges are subject to product availability and must be made within 24 hours of purchase with
+                    receipt.</p>
+            </div>
+
+            <div class="refund-section">
+                <h2>Damaged or Defective Items</h2>
+                <p>If you receive a damaged or defective item:</p>
+                <ul>
+                    <li>Do not use the product</li>
+                    <li>Contact us immediately (within 24 hours of purchase)</li>
+                    <li>Bring the item and packaging to our store for inspection</li>
+                    <li>We'll replace the item or issue a full refund</li>
+                </ul>
+                <p>For health and safety reasons, we cannot accept returns of opened food items unless they are
+                    defective.</p>
+            </div>
+
+            <div class="refund-section">
+                <h2>Student Discount Refunds</h2>
+                <p>Refunds for items purchased with student discounts:</p>
+                <ul>
+                    <li>Will be calculated based on the discounted price paid</li>
+                    <li>Require valid student ID verification at time of refund</li>
+                    <li>Cannot be applied to future purchases as credit</li>
+                </ul>
+            </div>
+
+            <div class="refund-section">
+                <h2>Contact Us</h2>
+                <p>For questions about our refund policy or to initiate a refund:</p>
+                <ul>
+                    <li>Email: refunds@campustuck.edu</li>
+                    <li>Phone: 0315-1622934 (ask for Refund Department)</li>
+                    <li>In Person: Visit our store during business hours</li>
+                </ul>
+                <p>Our customer service team is available Monday-Friday, 9AM-5PM to assist with refund requests.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-col footer-about">
+                <div class="logo">
+                    <i class="fas fa-store"></i>
+                    Campus Tuck
+                </div>
+                <p>Your one-stop shop for all campus essentials, providing quality products with quick service to the
+                    student community.</p>
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="../../index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+                    <li><a href="products.html"><i class="fas fa-chevron-right"></i> Products</a></li>
+                    <li><a href="products.html"><i class="fas fa-chevron-right"></i> Special Offers</a></li>
+                    <li><a href="aboutus.html"><i class="fas fa-chevron-right"></i> About Us</a></li>
+                    <li><a href="contact.html"><i class="fas fa-chevron-right"></i> Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h3>Legal</h3>
+                <ul class="footer-links">
+                    <li><a href="term&condition.html"><i class="fas fa-chevron-right"></i> Terms & Conditions</a></li>
+                    <li><a href="privacy&policy.html"><i class="fas fa-chevron-right"></i> Privacy Policy</a></li>
+                    <li><a href="refundspolicy.html"><i class="fas fa-chevron-right"></i> Refund Policy</a></li>
+                    <li><a href="shippingpolicy.html"><i class="fas fa-chevron-right"></i> Shipping Policy</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col footer-contact">
+                <h3>Contact Us</h3>
+                <p><i class="fas fa-map-marker-alt"></i> Campus Building A, Room 101</p>
+                <p><i class="fas fa-phone"></i> 03151622934</p>
+                <p><i class="fas fa-envelope"></i> info@campustuck.edu</p>
+                <p><i class="fas fa-clock"></i> Mon-Fri: 8AM-8PM</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            &copy; 2025 Campus Tuck. All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+        // Simple script for smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

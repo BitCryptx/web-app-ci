@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account - Campus Tuck</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2E7D32;
+            --primary-light: #4CAF50;
+            --secondary: #FFC107;
+            --dark: #1B5E20;
+            --light: #F1F8E9;
+            --text: #333333;
+            --gray: #E0E0E0;
+            --white: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #f9f9f9;
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Pacifico', cursive;
+            font-size: 28px;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.03);
+        }
+
+        .logo i {
+            margin-right: 10px;
+            color: var(--primary-light);
+            font-size: 24px;
+        }
+
+        /* Navigation Menu */
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-item {
+            margin-left: 25px;
+            position: relative;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            padding: 8px 0;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-light);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-light);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link i {
+            margin-right: 8px;
+            font-size: 18px;
+        }
+
+        /* Auth Buttons */
+        .auth-buttons {
+            display: flex;
+            align-items: center;
+        }
+
+        .auth-btn {
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-weight: 500;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            margin-left: 15px;
+        }
+
+        .auth-btn i {
+            margin-right: 8px;
+            font-size: 16px;
+        }
+
+        .btn-outline {
+            border: 2px solid var(--primary-light);
+            color: var(--primary-light);
+            background: transparent;
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary-light);
+            color: var(--white);
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
+        }
+
+        .btn-solid {
+            background-color: var(--primary-light);
+            color: var(--white);
+            border: 2px solid var(--primary-light);
+        }
+
+        .btn-solid:hover {
+            background-color: var(--dark);
+            border-color: var(--dark);
+            box-shadow: 0 5px 15px rgba(46, 125, 50, 0.3);
+        }
+
+        /* Registration Hero */
+        .register-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+            margin-bottom: 60px;
+        }
+
+        .register-hero h1 {
+            font-size: 36px;
+            margin-bottom: 15px;
+        }
+
+        /* Registration Form */
+        .register-section {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px 80px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: flex-start;
+        }
+
+        .register-info {
+            background-color: var(--white);
+            border-radius: 10px;
+            padding: 40px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .register-info h2 {
+            font-size: 28px;
+            color: var(--primary);
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .register-info h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--primary-light);
+        }
+
+        .register-info ul {
+            margin-left: 20px;
+            margin-bottom: 30px;
+        }
+
+        .register-info li {
+            margin-bottom: 15px;
+            color: #555;
+        }
+
+        .register-info i {
+            color: var(--primary-light);
+            margin-right: 10px;
+        }
+
+        .register-form {
+            background-color: var(--white);
+            border-radius: 10px;
+            padding: 40px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .register-form h2 {
+            font-size: 28px;
+            color: var(--primary);
+            margin-bottom: 30px;
+            position: relative;
+            text-align: center;
+        }
+
+        .register-form h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 3px;
+            background-color: var(--primary-light);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--gray);
+            border-radius: 5px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-light);
+            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 14px;
+            background-color: var(--primary-light);
+            color: var(--white);
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .submit-btn:hover {
+            background-color: var(--dark);
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 15px;
+        }
+
+        .login-link a {
+            color: var(--primary-light);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 60px 20px 30px;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+        }
+
+        .footer-col h3 {
+            font-size: 20px;
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--primary-light);
+        }
+
+        .footer-about .logo {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: var(--white);
+        }
+
+        .footer-about p {
+            margin-bottom: 20px;
+            opacity: 0.8;
+            font-size: 14px;
+        }
+
+        .footer-social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .footer-social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: var(--white);
+            transition: all 0.3s ease;
+        }
+
+        .footer-social-link:hover {
+            background-color: var(--primary-light);
+            transform: translateY(-3px);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 15px;
+        }
+
+        .footer-links a {
+            color: var(--white);
+            opacity: 0.8;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+            padding-left: 5px;
+        }
+
+        .footer-links a i {
+            margin-right: 10px;
+            font-size: 14px;
+        }
+
+        .footer-contact p {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            opacity: 0.8;
+            font-size: 14px;
+        }
+
+        .footer-contact p i {
+            margin-right: 10px;
+            color: var(--primary-light);
+            font-size: 16px;
+            width: 20px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            margin-top: 50px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.7;
+            font-size: 14px;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .nav-container {
+                flex-direction: column;
+            }
+
+            .logo {
+                margin-bottom: 15px;
+            }
+
+            .nav-menu {
+                margin-bottom: 15px;
+            }
+
+            .auth-buttons {
+                margin-top: 15px;
+            }
+
+            .register-hero h1 {
+                font-size: 32px;
+            }
+
+            .register-section {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .nav-item {
+                margin: 5px 10px;
+            }
+
+            .register-hero {
+                height: 200px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 576px) {
+
+            .register-info,
+            .register-form {
+                padding: 30px 20px;
+            }
+
+            .footer-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="nav-container">
+            <a href="../../index.html" class="logo">
+                <i class="fas fa-store"></i>
+                Campus Tuck
+            </a>
+
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="../../index.html" class="nav-link">
+                        <i class="fas fa-home"></i>
+                        Home
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="products.html" class="nav-link">
+                        <i class="fas fa-bars"></i>
+                        Products
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="products.html" class="nav-link">
+                        <i class="fas fa-fire"></i>
+                        Special Offers
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="aboutus.html" class="nav-link">
+                        <i class="fas fa-info-circle"></i>
+                        About Us
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="contact.html" class="nav-link">
+                        <i class="fas fa-phone"></i>
+                        Contact
+                    </a>
+                </li>
+            </ul>
+
+            <div class="auth-buttons">
+                <button class="auth-btn btn-outline" onclick="window.location.href='user.html'">
+                    <i class="fas fa-sign-in-alt"></i>
+                    Login
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Registration Hero -->
+    <section class="register-hero">
+        <div>
+            <h1>Create Your Account</h1>
+            <p>Join thousands of students who shop at Campus Tuck</p>
+        </div>
+    </section>
+
+    <!-- Registration Section -->
+    <section class="register-section">
+        <div class="register-info">
+            <h2>Why Register?</h2>
+            <ul>
+                <li><i class="fas fa-check-circle"></i> Faster checkout process</li>
+                <li><i class="fas fa-check-circle"></i> Track your order history</li>
+                <li><i class="fas fa-check-circle"></i> Exclusive member discounts</li>
+                <li><i class="fas fa-check-circle"></i> Earn loyalty points with every purchase</li>
+                <li><i class="fas fa-check-circle"></i> Get notified about special offers</li>
+            </ul>
+
+            <div class="security-info">
+                <h3><i class="fas fa-lock"></i> Your Security Matters</h3>
+                <p>We use industry-standard encryption to protect your personal information. Your data is safe with us.
+                </p>
+            </div>
+        </div>
+
+        <div class="register-form">
+            <h2>Create Account</h2>
+            <form id="registrationForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="firstName">First Name</label>
+                        <input type="text" id="firstName" class="form-control" placeholder="Enter your first name"
+                            required>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Last Name</label>
+                        <input type="text" id="lastName" class="form-control" placeholder="Enter your last name"
+                            required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" class="form-control" placeholder="Enter your email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" class="form-control" placeholder="Enter your phone number" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="studentId">Student ID</label>
+                    <input type="text" id="studentId" class="form-control" placeholder="Enter your student ID" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="address">Address</label>
+                    <input type="text" id="address" class="form-control" placeholder="Enter your address" required>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" class="form-control" placeholder="Create a password"
+                            required>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirm Password</label>
+                        <input type="password" id="confirmPassword" class="form-control"
+                            placeholder="Confirm your password" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <input type="checkbox" id="terms" required>
+                    <label for="terms" style="display: inline; font-weight: normal;">I agree to the <a
+                            href="term&condition.html" style="color: var(--primary-light);">Terms & Conditions</a> and
+                        <a href="privacy&policy.html" style="color: var(--primary-light);">Privacy Policy</a></label>
+                </div>
+
+                <button type="submit" class="submit-btn">
+                    <i class="fas fa-user-plus"></i> Create Account
+                </button>
+
+                <div class="login-link">
+                    Already have an account? <a href="login.html">Login here</a>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-col footer-about">
+                <div class="logo">
+                    <i class="fas fa-store"></i>
+                    Campus Tuck
+                </div>
+                <p>Your one-stop shop for all campus essentials, providing quality products with quick service to the
+                    student community.</p>
+                <div class="footer-social-links">
+                    <a href="#" class="footer-social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="footer-social-link"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="footer-social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="footer-social-link"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="../../index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+                    <li><a href="products.html"><i class="fas fa-chevron-right"></i> Products</a></li>
+                    <li><a href="products.html"><i class="fas fa-chevron-right"></i> Special Offers</a></li>
+                    <li><a href="aboutus.html"><i class="fas fa-chevron-right"></i> About Us</a></li>
+                    <li><a href="contact.html"><i class="fas fa-chevron-right"></i> Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h3>Categories</h3>
+                <ul class="footer-links">
+                    <li><a href="products.html"><i class="fas fa-chevron-right"></i> Snacks & Chips</a></li>
+                    <li><a href="products.html"><i class="fas fa-chevron-right"></i> Beverages</a></li>
+                    <li><a href="products.html"><i class="fas fa-chevron-right"></i> Chocolate</a></li>
+
+                </ul>
+            </div>
+
+            <div class="footer-col footer-contact">
+                <h3>Contact Us</h3>
+                <p><i class="fas fa-map-marker-alt"></i> Campus Building A, Room 101</p>
+                <p><i class="fas fa-phone"></i> 03151622934</p>
+                <p><i class="fas fa-envelope"></i> info@campustuck.edu</p>
+                <p><i class="fas fa-clock"></i> Mon-Fri: 8AM-8PM</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            &copy; 2025 Campus Tuck. All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('registrationForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            // Get form values
+            const firstName = document.getElementById('firstName').value;
+            const lastName = document.getElementById('lastName').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const studentId = document.getElementById('studentId').value;
+            const address = document.getElementById('address').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            // Validate passwords match
+            if (password !== confirmPassword) {
+                alert('Passwords do not match!');
+                return;
+            }
+
+            // Validate password strength (optional)
+            if (password.length < 8) {
+                alert('Password must be at least 8 characters long!');
+                return;
+            }
+
+            try {
+                // Send data to server
+                const response = await fetch('/post', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        firstName,
+                        lastName,
+                        email,
+                        phone,
+                        studentId,
+                        address,
+                        password
+                    })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    alert('Account created successfully!');
+                    this.reset();
+                    // Redirect to login or other page
+                    window.location.href = 'user.html';
+                } else {
+                    alert(data.error || 'Error creating account');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error submitting form. Please try again.');
+            }
+        });
+    </script>
+</body>
+
+</html>

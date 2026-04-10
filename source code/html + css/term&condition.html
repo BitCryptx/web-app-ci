@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms and Conditions - Campus Tuck</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2E7D32;
+            --primary-light: #4CAF50;
+            --secondary: #FFC107;
+            --dark: #1B5E20;
+            --light: #F1F8E9;
+            --text: #333333;
+            --gray: #E0E0E0;
+            --white: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #f9f9f9;
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Pacifico', cursive;
+            font-size: 28px;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.03);
+        }
+
+        .logo i {
+            margin-right: 10px;
+            color: var(--primary-light);
+            font-size: 24px;
+        }
+
+        /* Navigation Menu */
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-item {
+            margin-left: 25px;
+            position: relative;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            padding: 8px 0;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-light);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-light);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link i {
+            margin-right: 8px;
+            font-size: 18px;
+        }
+
+        /* Auth Buttons */
+        .auth-buttons {
+            display: flex;
+            align-items: center;
+        }
+
+        .auth-btn {
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-weight: 500;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            margin-left: 15px;
+        }
+
+        .auth-btn i {
+            margin-right: 8px;
+            font-size: 16px;
+        }
+
+        .btn-outline {
+            border: 2px solid var(--primary-light);
+            color: var(--primary-light);
+            background: transparent;
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary-light);
+            color: var(--white);
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
+        }
+
+        .btn-solid {
+            background-color: var(--primary-light);
+            color: var(--white);
+            border: 2px solid var(--primary-light);
+        }
+
+        .btn-solid:hover {
+            background-color: var(--dark);
+            border-color: var(--dark);
+            box-shadow: 0 5px 15px rgba(46, 125, 50, 0.3);
+        }
+
+        /* Terms Content */
+        .terms-container {
+            max-width: 1000px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+
+        .terms-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .terms-header h1 {
+            font-size: 36px;
+            color: var(--primary);
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .terms-header h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--primary-light);
+            border-radius: 3px;
+        }
+
+        .terms-header p {
+            color: #666;
+            font-size: 16px;
+        }
+
+        .terms-content {
+            background-color: var(--white);
+            border-radius: 10px;
+            padding: 40px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .terms-section {
+            margin-bottom: 30px;
+        }
+
+        .terms-section h2 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 22px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .terms-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--primary-light);
+        }
+
+        .terms-section p,
+        .terms-section ul {
+            margin-bottom: 15px;
+            color: #555;
+            font-size: 15px;
+        }
+
+        .terms-section ul {
+            padding-left: 20px;
+        }
+
+        .terms-section li {
+            margin-bottom: 8px;
+        }
+
+        .highlight {
+            background-color: rgba(76, 175, 80, 0.1);
+            padding: 15px;
+            border-left: 3px solid var(--primary-light);
+            margin: 20px 0;
+            border-radius: 0 5px 5px 0;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: var(--white);
+            padding: 60px 20px 30px;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+        }
+
+        .footer-col h3 {
+            font-size: 20px;
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--primary-light);
+        }
+
+        .footer-about .logo {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: var(--white);
+        }
+
+        .footer-about p {
+            margin-bottom: 20px;
+            opacity: 0.8;
+            font-size: 14px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: var(--white);
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background-color: var(--primary-light);
+            transform: translateY(-3px);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 15px;
+        }
+
+        .footer-links a {
+            color: var(--white);
+            opacity: 0.8;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+            padding-left: 5px;
+        }
+
+        .footer-links a i {
+            margin-right: 10px;
+            font-size: 14px;
+        }
+
+        .footer-contact p {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            opacity: 0.8;
+            font-size: 14px;
+        }
+
+        .footer-contact p i {
+            margin-right: 10px;
+            color: var(--primary-light);
+            font-size: 16px;
+            width: 20px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            margin-top: 50px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.7;
+            font-size: 14px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .terms-header h1 {
+                font-size: 28px;
+            }
+
+            .terms-content {
+                padding: 25px;
+            }
+
+            .terms-section h2 {
+                font-size: 20px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .terms-header h1 {
+                font-size: 24px;
+            }
+
+            .terms-content {
+                padding: 20px;
+            }
+
+            .nav-menu {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .nav-item {
+                margin: 5px 10px;
+            }
+
+            .auth-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .auth-btn {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="nav-container">
+            <a href="../../index.html" class="logo">
+                <i class="fas fa-store"></i>
+                Campus Tuck
+            </a>
+
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="products.html" class="nav-link">
+                        <i class="fas fa-bars"></i>
+                        Products
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="products.html" class="nav-link">
+                        <i class="fas fa-fire"></i>
+                        Special Offers
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="aboutus.html" class="nav-link">
+                        <i class="fas fa-info-circle"></i>
+                        About Us
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="contact.html" class="nav-link">
+                        <i class="fas fa-phone"></i>
+                        Contact
+                    </a>
+                </li>
+            </ul>
+
+            <div class="auth-buttons">
+                <button class="auth-btn btn-outline" onclick="window.location.href='user.html'">
+                    <i class="fas fa-user"></i>
+                    User Login
+                </button>
+                <button class="auth-btn btn-solid" onclick="window.location.href='adminlogin.html'">
+                    <i class="fas fa-user-shield"></i>
+                    Admin
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Terms Content -->
+    <div class="terms-container">
+        <div class="terms-header">
+            <h1>Terms and Conditions</h1>
+            <p>Last Updated: June 16, 2025</p>
+        </div>
+
+        <div class="terms-content">
+            <div class="terms-section">
+                <h2>1. Introduction</h2>
+                <p>Welcome to Campus Tuck. These Terms and Conditions govern your use of our
+                    campus store services, both in-store and online. By accessing or using our services, you agree to be
+                    bound by these terms.</p>
+
+                <div class="highlight">
+                    <p><strong>Note:</strong> These terms apply to all students, faculty, and visitors using Campus Tuck
+                        services.</p>
+                </div>
+            </div>
+
+            <div class="terms-section">
+                <h2>2. Eligibility</h2>
+                <p>To use our services, you must:</p>
+                <ul>
+                    <li>Be a currently enrolled student or faculty member with valid campus identification</li>
+                    <li>Be at least 16 years of age</li>
+                    <li>Have a valid payment method for online orders</li>
+                    <li>Comply with all campus policies and regulations</li>
+                </ul>
+            </div>
+
+            <div class="terms-section">
+                <h2>3. Products and Pricing</h2>
+                <p>All products are subject to availability. We reserve the right to:</p>
+                <ul>
+                    <li>Limit quantities available for purchase</li>
+                    <li>Change prices without prior notice</li>
+                    <li>Discontinue products at any time</li>
+                    <li>Correct pricing errors that may occur</li>
+                </ul>
+                <p>Student discounts require valid student ID verification at the time of purchase.</p>
+            </div>
+
+            <div class="terms-section">
+                <h2>4. Payment Methods</h2>
+                <p>We accept the following payment methods:</p>
+                <ul>
+                    <li>Cash (in-store only)</li>
+                    <li>Campus meal cards</li>
+                    <li>Credit/Debit cards (Visa, MasterCard)</li>
+                    <li>Mobile payment (Apple Pay, Google Pay)</li>
+                </ul>
+                <p>All prices are in PKR (Pakistani Rupees) and include applicable taxes unless otherwise stated.</p>
+            </div>
+
+            <div class="terms-section">
+                <h2>5. Online Ordering</h2>
+                <p>For online orders through our website:</p>
+                <ul>
+                    <li>Orders must be placed at least 2 hours before closing time</li>
+                    <li>Pickup times are estimates only</li>
+                    <li>You must present your student ID when picking up orders</li>
+                    <li>Unclaimed orders after 24 hours will be discarded with no refund</li>
+                </ul>
+            </div>
+
+            <div class="terms-section">
+                <h2>6. Returns and Refunds</h2>
+                <p>We accept returns under the following conditions:</p>
+                <ul>
+                    <li>Damaged or defective products (with receipt and within 24 hours)</li>
+                    <li>Incorrect items received (with receipt and within 24 hours)</li>
+                </ul>
+                <p>We do not accept returns for:</p>
+                <ul>
+                    <li>Perishable food items</li>
+                    <li>Opened snacks or beverages</li>
+                    <li>Personal preference changes</li>
+                </ul>
+                <p>Refunds will be issued to the original payment method within 5-7 business days.</p>
+            </div>
+
+            <div class="terms-section">
+                <h2>7. Prohibited Conduct</h2>
+                <p>When using our services, you agree not to:</p>
+                <ul>
+                    <li>Use false identification or impersonate others</li>
+                    <li>Resell products purchased from Campus Tuck</li>
+                    <li>Engage in any fraudulent activity</li>
+                    <li>Disrupt store operations or harass staff</li>
+                    <li>Violate any campus policies or local laws</li>
+                </ul>
+            </div>
+
+            <div class="terms-section">
+                <h2>8. Privacy Policy</h2>
+                <p>Your privacy is important to us. Please review our separate <a href="privacy.html"
+                        style="color: var(--primary-light);">Privacy Policy</a> which explains how we collect, use, and
+                    protect your personal information.</p>
+            </div>
+
+            <div class="terms-section">
+                <h2>9. Limitation of Liability</h2>
+                <p>Campus Tuck shall not be liable for:</p>
+                <ul>
+                    <li>Any indirect, incidental, or consequential damages</li>
+                    <li>Product allergies or dietary restrictions (customers are responsible for checking ingredients)
+                    </li>
+                    <li>Loss or damage to personal belongings while on premises</li>
+                    <li>Service interruptions beyond our reasonable control</li>
+                </ul>
+            </div>
+
+            <div class="terms-section">
+                <h2>10. Changes to Terms</h2>
+                <p>We may update these Terms periodically. The updated version will be posted on our website with a new
+                    "Last Updated" date. Your continued use of our services constitutes acceptance of the updated terms.
+                </p>
+            </div>
+
+            <div class="terms-section">
+                <h2>11. Governing Law</h2>
+                <p>These Terms shall be governed by and construed in accordance with the laws of Pakistan. Any disputes
+                    shall be resolved in the courts of Karachi, Pakistan.</p>
+            </div>
+
+            <div class="terms-section">
+                <h2>12. Contact Us</h2>
+                <p>If you have any questions about these Terms, please contact us:</p>
+                <ul>
+                    <li>Email: legal@campustuck.edu</li>
+                    <li>Phone: 0315-1622934</li>
+                    <li>In Person: Campus Building A, Room 101</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-col footer-about">
+                <div class="logo">
+                    <i class="fas fa-store"></i>
+                    Campus Tuck
+                </div>
+                <p>Your one-stop shop for all campus essentials, providing quality products with quick service to the
+                    student community.</p>
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="../../index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+                    <li><a href="products.html"><i class="fas fa-chevron-right"></i> Products</a></li>
+                    <li><a href="products.html"><i class="fas fa-chevron-right"></i> Special Offers</a></li>
+                    <li><a href="aboutus.html"><i class="fas fa-chevron-right"></i> About Us</a></li>
+                    <li><a href="contact.html"><i class="fas fa-chevron-right"></i> Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h3>Legal</h3>
+                <ul class="footer-links">
+                    <li><a href="term&condition.html"><i class="fas fa-chevron-right"></i> Terms & Conditions</a></li>
+                    <li><a href="privacy&policy.html"><i class="fas fa-chevron-right"></i> Privacy Policy</a></li>
+                    <li><a href="refundspolicy.html"><i class="fas fa-chevron-right"></i> Refund Policy</a></li>
+                    <li><a href="shippingpolicy.html"><i class="fas fa-chevron-right"></i> Shipping Policy</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col footer-contact">
+                <h3>Contact Us</h3>
+                <p><i class="fas fa-map-marker-alt"></i> Campus Building A, Room 101</p>
+                <p><i class="fas fa-phone"></i> 03151622934</p>
+                <p><i class="fas fa-envelope"></i> info@campustuck.edu</p>
+                <p><i class="fas fa-clock"></i> Mon-Fri: 8AM-8PM</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            &copy; 2025 Campus Tuck. All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+        // Simple script for smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

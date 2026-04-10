@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    image: musharaf1234/website:latest
+    ports:
+      - "80:3000"
+    environment:
+      - MONGODB_URI=mongodb+srv://musharafulislam333_db_user:musharafulislam333_db_user@cluster0.el4hzeg.mongodb.net/mydb
+    depends_on:
+      - mongo
+    restart: always
+
+  mongo:
+    image: mongo:6.0
+    volumes:
+      - mongo-data:/data/db
+    restart: always
+
+volumes:
+  mongo-data:

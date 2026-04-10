@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmation - Campus Tuck</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2E7D32;
+            --primary-light: #4CAF50;
+            --secondary: #FFC107;
+            --dark: #1B5E20;
+            --light: #F1F8E9;
+            --text: #333333;
+            --gray: #E0E0E0;
+            --white: #FFFFFF;
+            --error: #DC3545;
+            --success: #28A745;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .header h2 {
+            color: var(--primary);
+        }
+
+        .back-btn {
+            background-color: var(--primary-light);
+            color: var(--white);
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+
+        .back-btn:hover {
+            background-color: var(--dark);
+        }
+
+        .back-btn i {
+            margin-right: 5px;
+        }
+
+        .confirmation-card {
+            background-color: var(--white);
+            border-radius: 10px;
+            padding: 30px;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .confirmation-icon {
+            color: var(--success);
+            font-size: 60px;
+            margin-bottom: 20px;
+        }
+
+        .confirmation-card h1 {
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .confirmation-card p {
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+
+        .order-details {
+            background-color: var(--light);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 25px 0;
+            text-align: left;
+        }
+
+        .order-details h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            border-bottom: 1px solid var(--gray);
+            padding-bottom: 10px;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .detail-label {
+            font-weight: 500;
+            color: var(--text);
+        }
+
+        .detail-value {
+            color: var(--dark);
+            font-weight: 600;
+        }
+
+        .order-items {
+            margin-top: 20px;
+        }
+
+        .order-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px dashed var(--gray);
+        }
+
+        .item-name {
+            flex: 2;
+        }
+
+        .item-qty {
+            flex: 1;
+            text-align: center;
+        }
+
+        .item-price {
+            flex: 1;
+            text-align: right;
+        }
+
+        .order-total {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 2px solid var(--primary-light);
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .action-btns {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-light);
+            color: var(--white);
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--dark);
+        }
+
+        .btn-secondary {
+            background-color: var(--white);
+            color: var(--primary);
+            border: 1px solid var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--light);
+        }
+
+        @media (max-width: 576px) {
+            .container {
+                padding: 10px;
+            }
+
+            .confirmation-card {
+                padding: 20px;
+            }
+
+            .action-btns {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h2>Order Confirmation</h2>
+            <a href="products.html" class="back-btn"><i class="fas fa-arrow-left"></i> Back to Shop</a>
+        </div>
+
+        <div class="confirmation-card">
+            <div class="confirmation-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h1>Thank You For Your Order!</h1>
+            <p>Your payment was successful and your order has been placed. We've sent a confirmation email with your
+                order details.</p>
+
+            <div class="order-details">
+                <h3>Order Summary</h3>
+                <div class="detail-row">
+                    <span class="detail-label">Order Number:</span>
+                    <span class="detail-value" id="order-number">ORD-123456</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Order Date:</span>
+                    <span class="detail-value" id="order-date">June 4, 2023</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Delivery Address:</span>
+                    <span class="detail-value" id="delivery-address">123 College Ave, Dorm 5, Room 12</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Estimated Delivery:</span>
+                    <span class="detail-value" id="delivery-time">Today, 4:00 PM - 5:00 PM</span>
+                </div>
+
+                <div class="order-items">
+                    <h3>Items Ordered</h3>
+                    <div id="order-items-container">
+                        <!-- Order items will be dynamically inserted here -->
+                    </div>
+                </div>
+
+                <div class="order-total">
+                    <span>Total:</span>
+                    <span>$<span id="order-total">0.00</span></span>
+                </div>
+            </div>
+
+            <div class="action-btns">
+                <a href="products.html" class="btn btn-primary">Continue Shopping</a>
+                <a href="orders.html" class="btn btn-secondary">View My Orders</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Get order details from localStorage or URL parameters
+            const order = getOrderDetails();
+
+            // Display order information
+            displayOrderInfo(order);
+
+            // Display order items
+            displayOrderItems(order.items);
+
+            // Calculate and display total
+            calculateAndDisplayTotal(order.items);
+
+            // Clear cart after order is confirmed
+            clearCart();
+        });
+
+        function getOrderDetails() {
+            // Try to get order details from URL parameters first
+            const urlParams = new URLSearchParams(window.location.search);
+            const orderId = urlParams.get('order_id') || generateOrderId();
+
+            // Get customer info from localStorage
+            const customerInfo = JSON.parse(localStorage.getItem('customerInfo')) || {
+                address: "123 College Ave, Dorm 5, Room 12"
+            };
+
+            // Get cart items from localStorage
+            const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+
+            // Create order object
+            const order = {
+                id: orderId,
+                date: new Date(),
+                customer: customerInfo,
+                items: cartItems
+            };
+
+            return order;
+        }
+
+        function generateOrderId() {
+            return 'ORD-' + Math.floor(Math.random() * 1000000);
+        }
+
+        function displayOrderInfo(order) {
+            // Display order number
+            document.getElementById('order-number').textContent = order.id;
+
+            // Display order date
+            document.getElementById('order-date').textContent = order.date.toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+
+            // Display delivery address
+            if (order.customer && order.customer.address) {
+                document.getElementById('delivery-address').textContent = order.customer.address;
+            }
+
+            // Calculate and display delivery time (1 hour from now)
+            const deliveryTime = new Date(order.date.getTime() + 60 * 60 * 1000);
+            const options = { hour: '2-digit', minute: '2-digit' };
+            const startTime = deliveryTime.toLocaleTimeString('en-US', options);
+
+            const endTime = new Date(deliveryTime.getTime() + 60 * 60 * 1000)
+                .toLocaleTimeString('en-US', options);
+
+            document.getElementById('delivery-time').textContent =
+                `Today, ${startTime} - ${endTime}`;
+        }
+
+        function displayOrderItems(items) {
+            const container = document.getElementById('order-items-container');
+            container.innerHTML = '';
+
+            if (!items || items.length === 0) {
+                container.innerHTML = '<p>No items in this order</p>';
+                return;
+            }
+
+            items.forEach(item => {
+                const itemElement = document.createElement('div');
+                itemElement.className = 'order-item';
+                itemElement.innerHTML = `
+                    <span class="item-name">${item.name}</span>
+                    <span class="item-qty">${item.quantity} x</span>
+                    <span class="item-price">$${item.price.toFixed(2)}</span>
+                `;
+                container.appendChild(itemElement);
+            });
+        }
+
+        function calculateAndDisplayTotal(items) {
+            if (!items || items.length === 0) {
+                document.getElementById('order-total').textContent = '0.00';
+                return;
+            }
+
+            const total = items.reduce((sum, item) => {
+                return sum + (item.price * item.quantity);
+            }, 0);
+
+            // Add tax (example: 8% tax)
+            const tax = total * 0.08;
+            const grandTotal = total + tax;
+
+            // Display total (you could also show subtotal and tax separately)
+            document.getElementById('order-total').textContent = grandTotal.toFixed(2);
+        }
+
+        function clearCart() {
+            // Remove cart from localStorage
+            localStorage.removeItem('cart');
+        }
+    </script>
+</body>
+
+</html>

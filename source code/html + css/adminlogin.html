@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - Campus Tuck</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2E7D32;
+            --primary-light: #4CAF50;
+            --secondary: #FFC107;
+            --dark: #1B5E20;
+            --light: #F1F8E9;
+            --text: #333333;
+            --gray: #E0E0E0;
+            --white: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #f9f9f9;
+            color: var(--text);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Pacifico', cursive;
+            font-size: 28px;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.03);
+        }
+
+        .logo i {
+            margin-right: 10px;
+            color: var(--primary-light);
+            font-size: 24px;
+        }
+
+        main {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+
+        .admin-login-container {
+            width: 100%;
+            max-width: 500px;
+            background-color: var(--white);
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            text-align: center;
+        }
+
+        .admin-login-container h1 {
+            font-size: 28px;
+            color: var(--primary);
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .admin-login-container h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background-color: var(--primary-light);
+        }
+
+        .admin-icon {
+            width: 80px;
+            height: 80px;
+            background-color: var(--light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            color: var(--primary-light);
+            font-size: 32px;
+        }
+
+        .admin-login-form {
+            margin-top: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--gray);
+            border-radius: 5px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-light);
+            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+        }
+
+        .password-container {
+            position: relative;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #999;
+            cursor: pointer;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 14px;
+            background-color: var(--primary-light);
+            color: var(--white);
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .submit-btn:hover {
+            background-color: var(--dark);
+        }
+
+        .forgot-link {
+            display: block;
+            text-align: right;
+            margin-top: 10px;
+            color: var(--primary-light);
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        .footer-bottom {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        @media (max-width: 768px) {
+            .admin-login-container {
+                padding: 30px 20px;
+            }
+
+            .admin-login-container h1 {
+                font-size: 24px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .nav-container {
+                flex-direction: column;
+            }
+
+            .logo {
+                margin-bottom: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="nav-container">
+            <a href="../../index.html" class="logo">
+                <i class="fas fa-store"></i>
+                Campus Tuck
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <div class="admin-login-container">
+            <div class="admin-icon">
+                <i class="fas fa-user-shield"></i>
+            </div>
+            <h1>Admin Portal</h1>
+
+            <form class="admin-login-form" id="adminLoginForm">
+                <div class="form-group">
+                    <label for="username">Admin Username</label>
+                    <input type="text" id="username" class="form-control" placeholder="Enter your username" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <div class="password-container">
+                        <input type="password" id="password" class="form-control" placeholder="Enter your password"
+                            required>
+                        <i class="fas fa-eye toggle-password" id="togglePassword"></i>
+                    </div>
+                    <a href="#" class="forgot-link">Forgot password?</a>
+                </div>
+
+                <button type="submit" class="submit-btn">
+                    <i class="fas fa-sign-in-alt"></i> Login
+                </button>
+            </form>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-bottom">
+            &copy; 2025 Campus Tuck. All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+        // Toggle password visibility
+        document.getElementById('togglePassword').addEventListener('click', function () {
+            const passwordInput = document.getElementById('password');
+            const icon = this;
+
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        });
+
+        // Form submission
+        document.getElementById('adminLoginForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            if (!username || !password) {
+                alert('Please enter both username and password');
+                return;
+            }
+
+            if (username === 'admin' && password === 'admin') {
+                alert('Login successful!');
+                window.location.href = 'dashboard.html';
+            } else {
+                alert('Invalid credentials. Please try again.');
+            }
+        });
+    </script>
+</body>
+
+</html>

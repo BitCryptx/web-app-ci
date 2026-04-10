@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order - Campus Tuck</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2E7D32;
+            --primary-light: #4CAF50;
+            --secondary: #FFC107;
+            --dark: #1B5E20;
+            --light: #F1F8E9;
+            --text: #333333;
+            --gray: #E0E0E0;
+            --white: #FFFFFF;
+            --error: #DC3545;
+            --success: #28A745;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Pacifico', cursive;
+            font-size: 28px;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.03);
+        }
+
+        .logo i {
+            margin-right: 10px;
+            color: var(--primary-light);
+            font-size: 24px;
+        }
+
+        /* Navigation Menu */
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-item {
+            margin-left: 25px;
+            position: relative;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            padding: 8px 0;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-light);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-light);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link.active {
+            color: var(--primary-light);
+            font-weight: 600;
+        }
+
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .nav-link i {
+            margin-right: 8px;
+            font-size: 18px;
+        }
+
+        /* Auth Buttons */
+        .auth-buttons {
+            display: flex;
+            align-items: center;
+        }
+
+        .auth-btn {
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-weight: 500;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            margin-left: 15px;
+        }
+
+        .auth-btn i {
+            margin-right: 8px;
+            font-size: 16px;
+        }
+
+        .btn-outline {
+            border: 2px solid var(--primary-light);
+            color: var(--primary-light);
+            background: transparent;
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary-light);
+            color: var(--white);
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
+        }
+
+        .btn-solid {
+            background-color: var(--primary-light);
+            color: var(--white);
+            border: 2px solid var(--primary-light);
+        }
+
+        .btn-solid:hover {
+            background-color: var(--dark);
+            border-color: var(--dark);
+            box-shadow: 0 5px 15px rgba(46, 125, 50, 0.3);
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .header h2 {
+            color: var(--primary);
+        }
+
+        .back-btn {
+            background-color: var(--primary-light);
+            color: var(--white);
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+
+        .back-btn:hover {
+            background-color: var(--dark);
+        }
+
+        .back-btn i {
+            margin-right: 5px;
+        }
+
+        .order-table {
+            background-color: var(--white);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--gray);
+        }
+
+        th {
+            background-color: var(--light);
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background-color: #f9f9f9;
+        }
+
+        td img {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+
+        .quantity-control {
+            display: flex;
+            align-items: center;
+        }
+
+        .quantity-btn {
+            background-color: var(--primary-light);
+            color: var(--white);
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .quantity-btn:hover {
+            background-color: var(--dark);
+        }
+
+        .quantity-input {
+            width: 50px;
+            text-align: center;
+            border: 1px solid var(--gray);
+            border-radius: 5px;
+            padding: 5px;
+            margin: 0 5px;
+        }
+
+        .remove-btn {
+            background-color: var(--error);
+            color: var(--white);
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .remove-btn:hover {
+            background-color: #b02a37;
+        }
+
+        .order-card-container {
+            display: none;
+        }
+
+        .order-card {
+            background-color: var(--white);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .order-card img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .order-card .product-name {
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .order-card .product-price {
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .empty-cart {
+            text-align: center;
+            padding: 50px;
+            background-color: var(--white);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            display: none;
+        }
+
+        .customer-info {
+            background-color: var(--white);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 20px;
+        }
+
+        .customer-info h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--gray);
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group textarea {
+            height: 100px;
+            resize: vertical;
+        }
+
+        .summary {
+            background-color: var(--white);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .summary h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        .checkout-btn {
+            background-color: var(--primary-light);
+            color: var(--white);
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .checkout-btn:hover {
+            background-color: var(--dark);
+        }
+
+        .checkout-btn:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+
+        .error-message {
+            color: var(--error);
+            font-size: 12px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        input:invalid:not(:focus):not(:placeholder-shown) {
+            border-color: var(--error);
+        }
+
+        input:valid:not(:placeholder-shown) {
+            border-color: var(--success);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 60px 20px 30px;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+        }
+
+        .footer-col h3 {
+            font-size: 20px;
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--primary-light);
+        }
+
+        .footer-about .logo {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: var(--white);
+        }
+
+        .footer-about p {
+            margin-bottom: 20px;
+            opacity: 0.8;
+            font-size: 14px;
+        }
+
+        .footer-social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .footer-social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: var(--white);
+            transition: all 0.3s ease;
+        }
+
+        .footer-social-link:hover {
+            background-color: var(--primary-light);
+            transform: translateY(-3px);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 15px;
+        }
+
+        .footer-links a {
+            color: var(--white);
+            opacity: 0.8;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+            padding-left: 5px;
+        }
+
+        .footer-links a i {
+            margin-right: 10px;
+            font-size: 14px;
+        }
+
+        .footer-contact p {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            opacity: 0.8;
+            font-size: 14px;
+        }
+
+        .footer-contact p i {
+            margin-right: 10px;
+            color: var(--primary-light);
+            font-size: 16px;
+            width: 20px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            margin-top: 50px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.7;
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            .order-table {
+                display: none;
+            }
+
+            .order-card-container {
+                display: block;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .container {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="nav-container">
+            <a href="../../index.html" class="logo">
+                <i class="fas fa-store"></i>
+                Campus Tuck
+            </a>
+
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="../../index.html" class="nav-link">
+                        <i class="fas fa-home"></i>
+                        Home
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="products.html" class="nav-link">
+                        <i class="fas fa-bars"></i>
+                        Products
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="products.html" class="nav-link">
+                        <i class="fas fa-fire"></i>
+                        Special Offers
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="contact.html" class="nav-link active">
+                        <i class="fas fa-phone"></i>
+                        Contact
+                    </a>
+                </li>
+            </ul>
+
+            <div class="auth-buttons">
+                <button class="auth-btn btn-outline" onclick="window.location.href='user.html'">
+                    <i class="fas fa-user"></i>
+                    User Login
+                </button>
+                <button class="auth-btn btn-solid" onclick="window.location.href='adminlogin.html'">
+                    <i class="fas fa-user-shield"></i>
+                    Admin
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="header">
+            <h2>Checkout</h2>
+            <a href="products.html" class="back-btn"><i class="fas fa-arrow-left"></i> Back to Products</a>
+        </div>
+
+        <div class="empty-cart" id="empty-cart">
+            <h3>Your cart is empty.</h3>
+            <p><a href="products.html">Browse products</a> to add items to your cart.</p>
+        </div>
+
+        <div id="order-section" style="display: none;">
+            <div class="customer-info">
+                <h3>Customer Information</h3>
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required>
+                    <div class="error-message" id="email-error">Please enter a valid email address (e.g.,
+                        example@domain.com)</div>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" pattern="[0-9]{10,15}" required>
+                    <div class="error-message" id="phone-error">Please enter a valid phone number (10-15 digits)</div>
+                </div>
+                <div class="form-group">
+                    <label for="studentId">Student ID</label>
+                    <input type="text" id="studentId" required>
+                </div>
+                <div class="form-group">
+                    <label for="address">Delivery Address</label>
+                    <textarea id="address" required></textarea>
+                </div>
+            </div>
+
+            <div class="order-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Total</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="order-table-body"></tbody>
+                </table>
+            </div>
+
+            <div class="order-card-container" id="order-card-container"></div>
+
+            <div class="summary">
+                <h3>Order Summary</h3>
+                <div class="summary-item">
+                    <span>Total Items:</span>
+                    <span id="total-items">0</span>
+                </div>
+                <div class="summary-item">
+                    <span>Subtotal:</span>
+                    <span>RS <span id="subtotal">0.00</span></span>
+                </div>
+                <div class="summary-item">
+                    <span>Delivery Fee:</span>
+                    <span>RS <span id="delivery-fee">2.00</span></span>
+                </div>
+                <div class="summary-item" style="font-weight: bold; font-size: 18px;">
+                    <span>Total Cost:</span>
+                    <span>RS <span id="total-cost">0.00</span></span>
+                </div>
+                <button class="checkout-btn" id="checkout-btn">Place Order</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-col footer-about">
+                <div class="logo">
+                    <i class="fas fa-store"></i>
+                    Campus Tuck
+                </div>
+                <p>Your one-stop shop for all campus essentials, providing quality products with quick service to the
+                    student community.</p>
+                <div class="footer-social-links">
+                    <a href="#" class="footer-social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="footer-social-link"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="footer-social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="footer-social-link"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="../../index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+                    <li><a href="products.html"><i class="fas fa-chevron-right"></i> Products</a></li>
+                    <li><a href="products.html"><i class="fas fa-chevron-right"></i> Special Offers</a></li>
+                    <li><a href="contact.html"><i class="fas fa-chevron-right"></i> Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h3>Categories</h3>
+                <ul class="footer-links">
+                    <li><a href="products.html"><i class="fas fa-chevron-right"></i> Snacks & Chips</a></li>
+                    <li><a href="products.html"><i class="fas fa-chevron-right"></i> Beverages</a></li>
+                    <li><a href="products.html"><i class="fas fa-chevron-right"></i> Chocolate</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col footer-contact">
+                <h3>Contact Us</h3>
+                <p><i class="fas fa-map-marker-alt"></i> Campus Building A, Room 101</p>
+                <p><i class="fas fa-phone"></i> 03151622934</p>
+                <p><i class="fas fa-envelope"></i> info@campustuck.edu</p>
+                <p><i class="fas fa-clock"></i> Mon-Fri: 8AM-8PM</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            &copy; 2025 Campus Tuck. All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+        // API base URL
+        const API_BASE_URL = 'http://localhost:3019/api';
+
+        // Get orders from local storage
+        function getOrders() {
+            return JSON.parse(localStorage.getItem('orders')) || [];
+        }
+
+        // Save orders to local storage
+        function saveOrders(orders) {
+            localStorage.setItem('orders', JSON.stringify(orders));
+        }
+
+        // Fetch products from API
+        async function fetchProducts() {
+            try {
+                const response = await fetch(`${API_BASE_URL}/products`);
+                if (!response.ok) {
+                    throw new Error('Failed to fetch products');
+                }
+                return await response.json();
+            } catch (error) {
+                console.error('Error fetching products:', error);
+                return [];
+            }
+        }
+
+        // Render orders
+        async function renderOrders() {
+            const orders = getOrders();
+            const products = await fetchProducts();
+            const orderTableBody = document.getElementById('order-table-body');
+            const orderCardContainer = document.getElementById('order-card-container');
+            const emptyCart = document.getElementById('empty-cart');
+            const orderSection = document.getElementById('order-section');
+            const totalItems = document.getElementById('total-items');
+            const subtotal = document.getElementById('subtotal');
+            const totalCost = document.getElementById('total-cost');
+
+            orderTableBody.innerHTML = '';
+            orderCardContainer.innerHTML = '';
+
+            if (orders.length === 0) {
+                emptyCart.style.display = 'block';
+                orderSection.style.display = 'none';
+                totalItems.textContent = '0';
+                subtotal.textContent = '0.00';
+                totalCost.textContent = '0.00';
+                return;
+            }
+
+            emptyCart.style.display = 'none';
+            orderSection.style.display = 'block';
+
+            let subTotal = 0;
+            let itemCount = 0;
+
+            orders.forEach(order => {
+                const product = products.find(p => p._id === order.productId);
+                if (!product) return;
+
+                const itemTotal = product.price * order.quantity;
+                subTotal += itemTotal;
+                itemCount += order.quantity;
+
+                // Table row for desktop
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>
+                        <img src="${product.imageUrl || 'https://via.placeholder.com/150'}" alt="${product.name}">
+                        <span class="product-name">${product.name}</span>
+                    </td>
+                    <td>RS${product.price.toFixed(2)}</td>
+                    <td>
+                        <div class="quantity-control">
+                            <button class="quantity-btn" onclick="updateQuantity('${order.productId}', ${order.quantity - 1})">-</button>
+                            <input type="number" class="quantity-input" value="${order.quantity}" min="1" onchange="updateQuantity('${order.productId}', this.value)">
+                            <button class="quantity-btn" onclick="updateQuantity('${order.productId}', ${order.quantity + 1})">+</button>
+                        </div>
+                    </td>
+                    <td>RS${itemTotal.toFixed(2)}</td>
+                    <td>
+                        <button class="remove-btn" onclick="removeOrder('${order.productId}')">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </td>
+                `;
+                orderTableBody.appendChild(row);
+
+                // Card for mobile
+                const card = document.createElement('div');
+                card.className = 'order-card';
+                card.innerHTML = `
+                    <img src="${product.imageUrl || 'https://via.placeholder.com/150'}" alt="${product.name}">
+                    <div class="product-name">${product.name}</div>
+                    <div class="product-price">RS${product.price.toFixed(2)}</div>
+                    <div class="quantity-control">
+                        <button class="quantity-btn" onclick="updateQuantity('${order.productId}', ${order.quantity - 1})">-</button>
+                        <input type="number" class="quantity-input" value="${order.quantity}" min="1" onchange="updateQuantity('${order.productId}', this.value)">
+                        <button class="quantity-btn" onclick="updateQuantity('${order.productId}', ${order.quantity + 1})">+</button>
+                    </div>
+                    <div>Total: RS${itemTotal.toFixed(2)}</div>
+                    <button class="remove-btn" onclick="removeOrder('${order.productId}')">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                `;
+                orderCardContainer.appendChild(card);
+            });
+
+            const deliveryFee = 2.00;
+            const total = subTotal + deliveryFee;
+
+            totalItems.textContent = itemCount;
+            subtotal.textContent = subTotal.toFixed(2);
+            totalCost.textContent = total.toFixed(2);
+        }
+
+        // Update quantity
+        function updateQuantity(productId, newQuantity) {
+            newQuantity = parseInt(newQuantity);
+            if (isNaN(newQuantity)) newQuantity = 1;
+            if (newQuantity < 1) newQuantity = 1;
+
+            let orders = getOrders();
+            const orderIndex = orders.findIndex(o => o.productId === productId);
+            if (orderIndex !== -1) {
+                orders[orderIndex].quantity = newQuantity;
+                saveOrders(orders);
+                renderOrders();
+            }
+        }
+
+        // Remove an order
+        function removeOrder(productId) {
+            let orders = getOrders();
+            orders = orders.filter(o => o.productId !== productId);
+            saveOrders(orders);
+            renderOrders();
+        }
+
+        // Validate email format
+        function validateEmail(email) {
+            const re = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            return re.test(String(email).toLowerCase());
+        }
+
+        // Validate phone number format
+        function validatePhone(phone) {
+            const re = /^\d{10,15}$/;
+            return re.test(phone);
+        }
+
+        // Handle checkout
+        async function checkout() {
+            try {
+                const orders = getOrders();
+                if (orders.length === 0) {
+                    alert('Your cart is empty.');
+                    return;
+                }
+
+                // Get form values
+                const name = document.getElementById('name').value.trim();
+                const email = document.getElementById('email').value.trim();
+                const phone = document.getElementById('phone').value.trim();
+                const studentId = document.getElementById('studentId').value.trim();
+                const address = document.getElementById('address').value.trim();
+
+                // Reset error messages
+                document.getElementById('email-error').style.display = 'none';
+                document.getElementById('phone-error').style.display = 'none';
+
+                // Basic validation
+                if (!name || !email || !phone || !studentId || !address) {
+                    alert('Please fill in all customer information fields.');
+                    return;
+                }
+
+                // Email validation
+                if (!validateEmail(email)) {
+                    document.getElementById('email-error').style.display = 'block';
+                    document.getElementById('email').focus();
+                    return;
+                }
+
+                // Phone validation
+                if (!validatePhone(phone)) {
+                    document.getElementById('phone-error').style.display = 'block';
+                    document.getElementById('phone').focus();
+                    return;
+                }
+
+                const products = await fetchProducts();
+                const orderItems = orders.map(order => {
+                    const product = products.find(p => p._id === order.productId);
+                    return {
+                        productId: order.productId,
+                        name: product ? product.name : 'Unknown Product',
+                        quantity: order.quantity,
+                        price: product ? product.price : 0
+                    };
+                });
+
+                const subtotal = orderItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+                const deliveryFee = 2.00;
+                const total = subtotal + deliveryFee;
+
+                // Create order data for API
+                const orderData = {
+                    customerName: name,
+                    customerEmail: email,
+                    customerPhone: phone,
+                    studentId: studentId,
+                    deliveryAddress: address,
+                    items: orderItems,
+                    subtotal: subtotal,
+                    deliveryFee: deliveryFee,
+                    total: total
+                };
+
+                // Send order to the API
+                const response = await fetch(`${API_BASE_URL}/orders`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(orderData)
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.error || 'Failed to place order');
+                }
+
+                const orderResponse = await response.json();
+                const orderId = orderResponse.orderId;
+
+                // Clear cart
+                localStorage.removeItem('orders');
+
+                // Redirect to payment page with order ID
+                window.location.href = `payment.html?order_id=${orderId}`;
+
+            } catch (error) {
+                console.error('Error during checkout:', error);
+                alert(`Error processing order: ${error.message}`);
+            }
+        }
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', () => {
+            renderOrders();
+            document.getElementById('checkout-btn').addEventListener('click', checkout);
+
+            // Real-time validation for email
+            document.getElementById('email').addEventListener('input', function () {
+                if (this.value && !validateEmail(this.value)) {
+                    document.getElementById('email-error').style.display = 'block';
+                } else {
+                    document.getElementById('email-error').style.display = 'none';
+                }
+            });
+
+            // Real-time validation for phone
+            document.getElementById('phone').addEventListener('input', function () {
+                if (this.value && !validatePhone(this.value)) {
+                    document.getElementById('phone-error').style.display = 'block';
+                } else {
+                    document.getElementById('phone-error').style.display = 'none';
+                }
+            });
+        });
+
+        // Make functions available globally
+        window.updateQuantity = updateQuantity;
+        window.removeOrder = removeOrder;
+    </script>
+</body>
+
+</html>

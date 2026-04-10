@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Campus Tuck</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2E7D32;
+            --primary-light: #4CAF50;
+            --secondary: #FFC107;
+            --dark: #1B5E20;
+            --light: #F1F8E9;
+            --text: #333333;
+            --gray: #E0E0E0;
+            --white: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #f9f9f9;
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Pacifico', cursive;
+            font-size: 28px;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.03);
+        }
+
+        .logo i {
+            margin-right: 10px;
+            color: var(--primary-light);
+            font-size: 24px;
+        }
+
+        /* Navigation Menu */
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-item {
+            margin-left: 25px;
+            position: relative;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            padding: 8px 0;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-light);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-light);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link i {
+            margin-right: 8px;
+            font-size: 18px;
+        }
+
+        /* Auth Buttons */
+        .auth-buttons {
+            display: flex;
+            align-items: center;
+        }
+
+        .auth-btn {
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-weight: 500;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            margin-left: 15px;
+        }
+
+        .auth-btn i {
+            margin-right: 8px;
+            font-size: 16px;
+        }
+
+        .btn-outline {
+            border: 2px solid var(--primary-light);
+            color: var(--primary-light);
+            background: transparent;
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary-light);
+            color: var(--white);
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
+        }
+
+        .btn-solid {
+            background-color: var(--primary-light);
+            color: var(--white);
+            border: 2px solid var(--primary-light);
+        }
+
+        .btn-solid:hover {
+            background-color: var(--dark);
+            border-color: var(--dark);
+            box-shadow: 0 5px 15px rgba(46, 125, 50, 0.3);
+        }
+
+        /* About Hero Section */
+        .about-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 350px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+            margin-bottom: 60px;
+        }
+
+        .about-hero h1 {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        .about-hero p {
+            font-size: 18px;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* About Content */
+        .about-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px 80px;
+        }
+
+        .about-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+            margin-bottom: 80px;
+        }
+
+        .about-text h2 {
+            font-size: 36px;
+            color: var(--primary);
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .about-text h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background-color: var(--primary-light);
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+            color: #555;
+            font-size: 16px;
+        }
+
+        .about-image {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            height: 400px;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Mission Section */
+        .mission-section {
+            background-color: var(--light);
+            padding: 80px 0;
+            margin-bottom: 80px;
+        }
+
+        .mission-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        .mission-container h2 {
+            font-size: 36px;
+            color: var(--primary);
+            margin-bottom: 50px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .mission-container h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background-color: var(--primary-light);
+        }
+
+        .mission-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .mission-card {
+            background-color: var(--white);
+            border-radius: 10px;
+            padding: 40px 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .mission-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .mission-icon {
+            width: 70px;
+            height: 70px;
+            background-color: var(--light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            color: var(--primary-light);
+            font-size: 28px;
+        }
+
+        .mission-card h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        .mission-card p {
+            color: #666;
+            font-size: 15px;
+        }
+
+        /* Team Section */
+        .team-section {
+            max-width: 1200px;
+            margin: 0 auto 80px;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        .team-section h2 {
+            font-size: 36px;
+            color: var(--primary);
+            margin-bottom: 50px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .team-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background-color: var(--primary-light);
+        }
+
+        .team-section p {
+            max-width: 700px;
+            margin: 0 auto 50px;
+            color: #555;
+        }
+
+        .team-members {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .team-member {
+            background-color: var(--white);
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .team-member:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .member-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 auto 20px;
+            border: 5px solid var(--light);
+        }
+
+        .member-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .team-member h3 {
+            font-size: 20px;
+            margin-bottom: 5px;
+            color: var(--primary);
+        }
+
+        .team-member p.position {
+            color: var(--primary-light);
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+
+        .team-member p.bio {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .social-link {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background-color: var(--light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background-color: var(--primary-light);
+            color: var(--white);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 60px 20px 30px;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+        }
+
+        .footer-col h3 {
+            font-size: 20px;
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--primary-light);
+        }
+
+        .footer-about .logo {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: var(--white);
+        }
+
+        .footer-about p {
+            margin-bottom: 20px;
+            opacity: 0.8;
+            font-size: 14px;
+        }
+
+        .footer-social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .footer-social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: var(--white);
+            transition: all 0.3s ease;
+        }
+
+        .footer-social-link:hover {
+            background-color: var(--primary-light);
+            transform: translateY(-3px);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 15px;
+        }
+
+        .footer-links a {
+            color: var(--white);
+            opacity: 0.8;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+            padding-left: 5px;
+        }
+
+        .footer-links a i {
+            margin-right: 10px;
+            font-size: 14px;
+        }
+
+        .footer-contact p {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            opacity: 0.8;
+            font-size: 14px;
+        }
+
+        .footer-contact p i {
+            margin-right: 10px;
+            color: var(--primary-light);
+            font-size: 16px;
+            width: 20px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            margin-top: 50px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.7;
+            font-size: 14px;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .nav-container {
+                flex-direction: column;
+            }
+
+            .logo {
+                margin-bottom: 15px;
+            }
+
+            .nav-menu {
+                margin-bottom: 15px;
+            }
+
+            .auth-buttons {
+                margin-top: 15px;
+            }
+
+            .about-hero h1 {
+                font-size: 36px;
+            }
+
+            .about-container {
+                grid-template-columns: 1fr;
+            }
+
+            .about-image {
+                order: -1;
+                height: 300px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .nav-item {
+                margin: 5px 10px;
+            }
+
+            .about-hero {
+                height: 300px;
+            }
+
+            .about-hero h1 {
+                font-size: 32px;
+            }
+
+            .mission-cards {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .about-hero {
+                height: 250px;
+            }
+
+            .about-hero h1 {
+                font-size: 28px;
+            }
+
+            .about-text h2,
+            .mission-container h2,
+            .team-section h2 {
+                font-size: 28px;
+            }
+
+            .footer-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="nav-container">
+            <a href="../../index.html" class="logo">
+                <i class="fas fa-store"></i>
+                Campus Tuck
+            </a>
+
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="../../index.html" class="nav-link">
+                        <i class="fas fa-home"></i>
+                        Home
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="products.html" class="nav-link">
+                        <i class="fas fa-bars"></i>
+                        Products
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="products.html" class="nav-link">
+                        <i class="fas fa-fire"></i>
+                        Special Offers
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="aboutus.html" class="nav-link">
+                        <i class="fas fa-info-circle"></i>
+                        About Us
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="contact.html" class="nav-link">
+                        <i class="fas fa-phone"></i>
+                        Contact
+                    </a>
+                </li>
+            </ul>
+
+            <div class="auth-buttons">
+                <button class="auth-btn btn-outline" onclick="window.location.href='user.html'">
+                    <i class="fas fa-user"></i>
+                    User Login
+                </button>
+                <button class="auth-btn btn-solid" onclick="window.location.href='adminlogin.html'">
+                    <i class="fas fa-user-shield"></i>
+                    Admin
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- About Hero -->
+    <section class="about-hero">
+        <div>
+            <h1>Our Story</h1>
+            <p>Discover the journey behind Campus Tuck and our commitment to serving the student community</p>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section">
+        <div class="about-container">
+            <div class="about-text">
+                <h2>Welcome to Campus Tuck</h2>
+                <p>Founded in 2015, Campus Tuck began as a small kiosk in the university commons, with a simple mission:
+                    to provide students with convenient access to essential snacks, drinks, and supplies at affordable
+                    prices.</p>
+                <p>What started as a humble operation has grown into the most popular campus store, serving thousands of
+                    students each week across three locations on campus.</p>
+                <p>Our success comes from understanding student needs - we're run by students, for students. Our team
+                    knows exactly what you need to power through lectures, late-night study sessions, and everything in
+                    between.</p>
+            </div>
+
+            <div class="about-image">
+                <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80"
+                    alt="Campus Tuck Team">
+            </div>
+        </div>
+
+        <div class="mission-section">
+            <div class="mission-container">
+                <h2>Our Mission & Values</h2>
+
+                <div class="mission-cards">
+                    <div class="mission-card">
+                        <div class="mission-icon">
+                            <i class="fas fa-hand-holding-heart"></i>
+                        </div>
+                        <h3>Student-First Approach</h3>
+                        <p>We prioritize student needs above all else, offering products at prices that won't break your
+                            budget and convenient locations across campus.</p>
+                    </div>
+
+                    <div class="mission-card">
+                        <div class="mission-icon">
+                            <i class="fas fa-leaf"></i>
+                        </div>
+                        <h3>Sustainability</h3>
+                        <p>We're committed to reducing our environmental impact through eco-friendly packaging and
+                            responsible sourcing practices.</p>
+                    </div>
+
+                    <div class="mission-card">
+                        <div class="mission-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3>Community Support</h3>
+                        <p>A portion of every sale goes back into student programs and campus initiatives that make our
+                            university a better place.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="team-section">
+            <h2>Meet Our Team</h2>
+            <p>The passionate students and staff who make Campus Tuck possible</p>
+
+            <div class="team-members">
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="../../WhatsApp Image 2025-07-13 at 18.55.37_dd27d8df.jpg" alt="Muzamil Elahi">
+                    </div>
+                    <h3>Muzamil Elahi</h3>
+                    <p class="position">Founder & CEO</p>
+                    <p class="bio">Alumni who started Campus Tuck as a final year project that turned into a thriving
+                        business serving the campus community.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="../../Screenshot 2025-07-16 173804.png" alt="Said ul amin">
+                    </div>
+                    <h3>Said Ul Amin</h3>
+                    <p class="position">Operations Manager</p>
+                    <p class="bio">Business student who ensures our stores are stocked and running smoothly every day of
+                        the semester.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="../../Screenshot 2025-07-16 174025.png" alt="Hamza Aslam">
+                    </div>
+                    <h3>Hamza Aslam</h3>
+                    <p class="position">Product Coordinator</p>
+                    <p class="bio">Nutrition major who carefully selects our product range to balance taste, health, and
+                        student budgets.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-col footer-about">
+                <div class="logo">
+                    <i class="fas fa-store"></i>
+                    Campus Tuck
+                </div>
+                <p>Your one-stop shop for all campus essentials, providing quality products with quick service to the
+                    student community.</p>
+                <div class="footer-social-links">
+                    <a href="#" class="footer-social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="footer-social-link"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="footer-social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="footer-social-link"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="../../index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+                    <li><a href="products.html"><i class="fas fa-chevron-right"></i> Products</a></li>
+                    <li><a href="products.html"><i class="fas fa-chevron-right"></i> Special Offers</a></li>
+                    <li><a href="about.html"><i class="fas fa-chevron-right"></i> About Us</a></li>
+                    <li><a href="contact.html"><i class="fas fa-chevron-right"></i> Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h3>Categories</h3>
+                <ul class="footer-links">
+                    <li><a href="products.html"><i class="fas fa-chevron-right"></i> Snacks & Chips</a></li>
+                    <li><a href="products.html"><i class="fas fa-chevron-right"></i> Beverages</a></li>
+                    <li><a href="products.html"><i class="fas fa-chevron-right"></i> Confectionery</a></li>
+                    <li><a href="products.html"><i class="fas fa-chevron-right"></i> Stationery</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col footer-contact">
+                <h3>Contact Us</h3>
+                <p><i class="fas fa-map-marker-alt"></i> Campus Building A, Room 101</p>
+                <p><i class="fas fa-phone"></i> 03151622934</p>
+                <p><i class="fas fa-envelope"></i> info@campustuck.edu</p>
+                <p><i class="fas fa-clock"></i> Mon-Fri: 8AM-8PM</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            &copy; 2025 Campus Tuck. All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+        // Prevent default behavior for About Us link
+        document.querySelector('.nav-link[href="#"]').addEventListener('click', function (e) {
+            e.preventDefault();
+        });
+    </script>
+</body>
+
+</html>

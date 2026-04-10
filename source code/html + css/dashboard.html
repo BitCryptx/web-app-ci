@@ -1,0 +1,1236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Campus Tuck</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2E7D32;
+            --primary-light: #4CAF50;
+            --secondary: #FFC107;
+            --dark: #1B5E20;
+            --light: #F1F8E9;
+            --text: #333333;
+            --gray: #E0E0E0;
+            --white: #FFFFFF;
+            --sidebar: #2C3E50;
+            --danger: #DC3545;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: var(--text);
+            line-height: 1.6;
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 250px;
+            background-color: var(--sidebar);
+            color: var(--white);
+            height: 100vh;
+            position: fixed;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-header {
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+        }
+
+        .sidebar-header h3 {
+            font-size: 18px;
+            margin-left: 10px;
+        }
+
+        .sidebar-menu {
+            padding: 20px 0;
+        }
+
+        .sidebar-menu ul {
+            list-style: none;
+        }
+
+        .sidebar-menu li {
+            margin-bottom: 5px;
+        }
+
+        .sidebar-menu a {
+            display: flex;
+            align-items: center;
+            padding: 12px 20px;
+            color: var(--white);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-menu a:hover,
+        .sidebar-menu a.active {
+            background-color: var(--primary-light);
+        }
+
+        .sidebar-menu a i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+
+        .main-content {
+            margin-left: 250px;
+            width: calc(100% - 250px);
+            padding: 20px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .header h2 {
+            color: var(--primary);
+        }
+
+        .user-menu {
+            display: flex;
+            align-items: center;
+        }
+
+        .user-menu img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .logout-btn {
+            background-color: var(--primary-light);
+            color: var(--white);
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .logout-btn:hover {
+            background-color: var(--dark);
+        }
+
+        .content-tabs {
+            background-color: var(--white);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+
+        .tab-header {
+            display: flex;
+            border-bottom: 1px solid var(--gray);
+        }
+
+        .tab-btn {
+            padding: 15px 20px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            color: #666;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn.active {
+            color: var(--primary);
+        }
+
+        .tab-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: var(--primary-light);
+        }
+
+        .tab-content {
+            padding: 20px;
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .table-responsive {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--gray);
+        }
+
+        th {
+            background-color: var(--light);
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background-color: #f9f9f9;
+        }
+
+        .status {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+            display: inline-block;
+            min-width: 80px;
+            text-align: center;
+        }
+
+        .status-pending {
+            background-color: #FFF3CD;
+            color: #856404;
+        }
+
+        .status-processing {
+            background-color: #CCE5FF;
+            color: #004085;
+        }
+
+        .status-shipped {
+            background-color: #D1ECF1;
+            color: #0C5460;
+        }
+
+        .status-delivered {
+            background-color: #D4EDDA;
+            color: #155724;
+        }
+
+        .status-cancelled {
+            background-color: #F8D7DA;
+            color: #721C24;
+        }
+
+        .status-paid {
+            background-color: #D4EDDA;
+            color: #155724;
+        }
+
+        .status-refunded {
+            background-color: #F8D7DA;
+            color: #721C24;
+        }
+
+        .status-pending-payment {
+            background-color: #FFF3CD;
+            color: #856404;
+        }
+
+        .action-btn {
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            margin-right: 5px;
+        }
+
+        .edit-btn {
+            background-color: #FFC107;
+            color: #000;
+        }
+
+        .delete-btn {
+            background-color: var(--danger);
+            color: white;
+        }
+
+        .update-btn {
+            background-color: var(--primary-light);
+            color: white;
+        }
+
+        .form-container {
+            background-color: var(--white);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid var(--gray);
+            border-radius: 5px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-light);
+            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+        }
+
+        textarea.form-control {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .submit-btn {
+            background-color: var(--primary-light);
+            color: var(--white);
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background-color: var(--dark);
+        }
+
+        .alert {
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .alert-success {
+            background-color: #D4EDDA;
+            color: #155724;
+            border: 1px solid #C3E6CB;
+        }
+
+        .alert-error {
+            background-color: #F8D7DA;
+            color: #721C24;
+            border: 1px solid #F5C6CB;
+        }
+
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 5px;
+        }
+
+        .footer-bottom {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        .product-image-preview {
+            max-width: 100px;
+            max-height: 100px;
+            display: none;
+            margin-top: 10px;
+            border-radius: 5px;
+        }
+
+        .product-image-cell img {
+            max-width: 50px;
+            max-height: 50px;
+            border-radius: 5px;
+            object-fit: cover;
+        }
+
+        .order-details {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 10px;
+            display: none;
+        }
+
+        .order-details.active {
+            display: block;
+        }
+
+        .order-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .order-item:last-child {
+            border-bottom: none;
+        }
+
+        .order-total {
+            font-weight: bold;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 2px solid #ddd;
+        }
+
+        .status-select {
+            padding: 5px;
+            border-radius: 5px;
+            border: 1px solid var(--gray);
+        }
+
+        .currency {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        @media (max-width: 992px) {
+            .sidebar {
+                width: 80px;
+                overflow: hidden;
+            }
+
+            .sidebar-header h3,
+            .sidebar-menu a span {
+                display: none;
+            }
+
+            .sidebar-menu a {
+                justify-content: center;
+            }
+
+            .sidebar-menu a i {
+                margin-right: 0;
+                font-size: 20px;
+            }
+
+            .main-content {
+                margin-left: 80px;
+                width: calc(100% - 80px);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Modal styles */
+        .modal-content {
+            animation: modalopen 0.3s;
+        }
+
+        @keyframes modalopen {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .close-modal {
+            transition: all 0.3s;
+        }
+
+        .close-modal:hover {
+            color: var(--primary-light);
+        }
+
+        @media (max-width: 576px) {
+            .sidebar {
+                width: 0;
+            }
+
+            .main-content {
+                margin-left: 0;
+                width: 100%;
+            }
+
+            .tab-header {
+                flex-wrap: wrap;
+            }
+
+            .tab-btn {
+                flex: 1 0 50%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <a href="../../index.html"
+                style="display: flex; align-items: center; text-decoration: none; color: inherit;">
+                <i class="fas fa-store"></i>
+                <h3>Campus Tuck</h3>
+            </a>
+        </div>
+        <div class="sidebar-menu">
+            <ul>
+                <li><a href="#" class="active" id="dashboard-tab"><i
+                            class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
+                <li><a href="#" id="products-tab"><i class="fas fa-box-open"></i><span>Products</span></a></li>
+                <li><a href="#" id="orders-tab"><i class="fas fa-shopping-cart"></i><span>Orders</span></a></li>
+                <li><a href="#" id="payments-tab"><i class="fas fa-money-bill-wave"></i><span>Payments</span></a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="header">
+            <h2>Admin Dashboard</h2>
+            <div class="user-menu">
+                <img src="https://randomuser.me/api/portraits/men/41.jpg" alt="Admin User">
+                <button class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</button>
+            </div>
+        </div>
+
+        <div id="alert-container"></div>
+
+        <div class="content-tabs" id="dashboard-content">
+            <div class="tab-header">
+                <button class="tab-btn active" data-tab="products">Add Product</button>
+                <button class="tab-btn" data-tab="orders">Orders</button>
+                <button class="tab-btn" data-tab="payments">Payments</button>
+            </div>
+
+            <div class="tab-content active" id="products">
+                <div class="form-container">
+                    <h3>Add New Product</h3>
+                    <form id="addProductForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="productName">Product Name</label>
+                                <input type="text" id="productName" class="form-control"
+                                    placeholder="Enter product name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="productCategory">Category</label>
+                                <select id="productCategory" class="form-control" required>
+                                    <option value="">Select category</option>
+                                    <option value="snacks">Snacks & Chips</option>
+                                    <option value="beverages">Beverages</option>
+                                    <option value="Chocolate">Chocolate</option>
+                                    <option value="stationery">Stationery</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="productPrice">Price</label>
+                                <input type="number" id="productPrice" class="form-control" placeholder="Enter price"
+                                    step="0.01" min="0" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="productStock">Stock Quantity</label>
+                                <input type="number" id="productStock" class="form-control"
+                                    placeholder="Enter stock quantity" min="0" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="productDescription">Description</label>
+                            <textarea id="productDescription" class="form-control"
+                                placeholder="Enter product description"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="productImage">Product Image</label>
+                            <input type="file" id="productImage" class="form-control" accept="image/*" required>
+                            <img id="imagePreview" class="product-image-preview" src="#" alt="Preview">
+                        </div>
+                        <button type="submit" class="submit-btn"><i class="fas fa-plus"></i> Add Product</button>
+                    </form>
+                </div>
+
+                <div class="table-responsive">
+                    <h3>Product List</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Image</th>
+                                <th>Name</th>
+                                <th>Category</th>
+                                <th>Price</th>
+                                <th>Stock</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="products-table-body">
+                            <!-- Products will be loaded here dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="tab-content" id="orders">
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Order ID</th>
+                                <th>Customer</th>
+                                <th>Date</th>
+                                <th>Total</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="orders-table-body">
+                            <!-- Orders will be loaded here dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="tab-content" id="payments">
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Payment ID</th>
+                                <th>Order ID</th>
+                                <th>Amount</th>
+                                <th>Date</th>
+                                <th>Method</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="payments-table-body">
+                            <!-- Payments will be loaded here dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <div class="footer-bottom">
+                © 2023 Campus Tuck. All rights reserved.
+            </div>
+        </footer>
+        <!-- Edit Product Modal -->
+        <div id="editProductModal" class="modal"
+            style="display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.4);">
+            <div class="modal-content"
+                style="background-color: #fefefe; margin: 5% auto; padding: 20px; border: 1px solid #888; width: 80%; max-width: 600px; border-radius: 5px;">
+                <span class="close-modal"
+                    style="float: right; font-size: 28px; font-weight: bold; cursor: pointer;">&times;</span>
+                <h3>Edit Product</h3>
+                <form id="editProductForm">
+                    <input type="hidden" id="editProductId">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="editProductName">Product Name</label>
+                            <input type="text" id="editProductName" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editProductCategory">Category</label>
+                            <select id="editProductCategory" class="form-control" required>
+                                <option value="">Select category</option>
+                                <option value="snacks">Snacks & Chips</option>
+                                <option value="beverages">Beverages</option>
+                                <option value="Chocolate">Chocolate</option>
+                                <option value="stationery">Stationery</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="editProductPrice">Price</label>
+                            <input type="number" id="editProductPrice" class="form-control" step="0.01" min="0"
+                                required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editProductStock">Stock Quantity</label>
+                            <input type="number" id="editProductStock" class="form-control" min="0" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="editProductDescription">Description</label>
+                        <textarea id="editProductDescription" class="form-control"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="editProductImage">Product Image</label>
+                        <input type="file" id="editProductImage" class="form-control" accept="image/*">
+                        <img id="editImagePreview" class="product-image-preview" src="#" alt="Preview">
+                        <input type="hidden" id="currentImageUrl">
+                    </div>
+                    <button type="submit" class="submit-btn"><i class="fas fa-save"></i> Update Product</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Base URL for API - matches your server port
+        const API_BASE_URL = 'http://localhost:3019';
+
+        // DOM Elements
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+        const sidebarTabs = document.querySelectorAll('.sidebar-menu a');
+        const dashboardContent = document.getElementById('dashboard-content');
+        const alertContainer = document.getElementById('alert-container');
+        const imagePreview = document.getElementById('imagePreview');
+        const productImageInput = document.getElementById('productImage');
+        const addProductForm = document.getElementById('addProductForm');
+        const productsTableBody = document.getElementById('products-table-body');
+        const ordersTableBody = document.getElementById('orders-table-body');
+        const paymentsTableBody = document.getElementById('payments-table-body');
+
+        // Show alert message
+        function showAlert(message, type = 'success') {
+            const alertDiv = document.createElement('div');
+            alertDiv.className = `alert alert-${type}`;
+            alertDiv.textContent = message;
+            alertContainer.appendChild(alertDiv);
+            alertDiv.style.display = 'block';
+
+            setTimeout(() => {
+                alertDiv.style.opacity = '0';
+                setTimeout(() => {
+                    alertDiv.remove();
+                }, 500);
+            }, 5000);
+        }
+
+        // Image preview handler
+        productImageInput.addEventListener('change', function (e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    imagePreview.src = e.target.result;
+                    imagePreview.style.display = 'block';
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Tab functionality
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const tabId = btn.getAttribute('data-tab');
+                tabBtns.forEach(btn => btn.classList.remove('active'));
+                tabContents.forEach(content => content.classList.remove('active'));
+                btn.classList.add('active');
+                document.getElementById(tabId).classList.add('active');
+
+                // Load data when tab is clicked
+                if (tabId === 'orders') {
+                    fetchOrders();
+                } else if (tabId === 'payments') {
+                    fetchPayments();
+                }
+            });
+        });
+
+        // Sidebar navigation - UPDATED TO WORK PROPERLY
+        sidebarTabs.forEach(tab => {
+            tab.addEventListener('click', (e) => {
+                e.preventDefault();
+                const tabId = tab.id.replace('-tab', '');
+                sidebarTabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+
+                // Always show the dashboard content (which contains all tabs)
+                dashboardContent.style.display = 'block';
+
+                // Activate the corresponding tab based on sidebar selection
+                tabBtns.forEach(btn => btn.classList.remove('active'));
+                tabContents.forEach(content => content.classList.remove('active'));
+
+                if (tabId === 'dashboard') {
+                    // Default to products tab when dashboard is clicked
+                    document.querySelector('.tab-btn[data-tab="products"]').classList.add('active');
+                    document.getElementById('products').classList.add('active');
+                } else {
+                    // Activate the tab that matches the sidebar selection
+                    document.querySelector(`.tab-btn[data-tab="${tabId}"]`).classList.add('active');
+                    document.getElementById(tabId).classList.add('active');
+                }
+
+                // Load data when sidebar tab is clicked
+                if (tabId === 'orders') {
+                    fetchOrders();
+                } else if (tabId === 'payments') {
+                    fetchPayments();
+                } else if (tabId === 'products') {
+                    fetchProducts();
+                }
+            });
+        });
+
+        // Form submission for adding product
+        addProductForm.addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            const formData = new FormData();
+            formData.append('name', document.getElementById('productName').value);
+            formData.append('category', document.getElementById('productCategory').value);
+            formData.append('price', document.getElementById('productPrice').value);
+            formData.append('stock', document.getElementById('productStock').value);
+            formData.append('description', document.getElementById('productDescription').value);
+
+            const imageFile = document.getElementById('productImage').files[0];
+            if (!imageFile) {
+                showAlert('Please select an image for the product', 'error');
+                return;
+            }
+            formData.append('image', imageFile);
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/products`, {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    showAlert('Product added successfully!');
+                    addProductForm.reset();
+                    imagePreview.style.display = 'none';
+                    fetchProducts(); // Refresh product list
+                } else {
+                    showAlert(result.error || 'Failed to add product', 'error');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                showAlert('Error adding product. Please try again.', 'error');
+            }
+        });
+
+        // Modal functionality
+        const editProductModal = document.getElementById('editProductModal');
+        const closeModal = document.querySelector('.close-modal');
+
+        closeModal.addEventListener('click', () => {
+            editProductModal.style.display = 'none';
+        });
+
+        window.addEventListener('click', (e) => {
+            if (e.target === editProductModal) {
+                editProductModal.style.display = 'none';
+            }
+        });
+
+        // Edit product image preview
+        document.getElementById('editProductImage').addEventListener('change', function (e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    document.getElementById('editImagePreview').src = e.target.result;
+                    document.getElementById('editImagePreview').style.display = 'block';
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+
+        async function openEditProductModal(productId) {
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/products/${productId}`);
+
+                if (!response.ok) {
+                    throw new Error(`Failed to fetch product: ${response.status}`);
+                }
+
+                const product = await response.json();
+
+                // Fill the form with product data
+                document.getElementById('editProductId').value = product._id;
+                document.getElementById('editProductName').value = product.name;
+                document.getElementById('editProductCategory').value = product.category;
+                document.getElementById('editProductPrice').value = product.price;
+                document.getElementById('editProductStock').value = product.stock;
+                document.getElementById('editProductDescription').value = product.description || '';
+                document.getElementById('currentImageUrl').value = product.imageUrl;
+
+                // Set image preview
+                const editImagePreview = document.getElementById('editImagePreview');
+                if (product.imageUrl) {
+                    editImagePreview.src = product.imageUrl.startsWith('http')
+                        ? product.imageUrl
+                        : `${API_BASE_URL}${product.imageUrl}`;
+                    editImagePreview.style.display = 'block';
+                } else {
+                    editImagePreview.style.display = 'none';
+                }
+
+                // Show the modal
+                editProductModal.style.display = 'block';
+            } catch (error) {
+                console.error('Error fetching product details:', error);
+                showAlert(`Error loading product details: ${error.message}`, 'error');
+            }
+        }
+        // Fetch and render products
+        async function fetchProducts() {
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/products`);
+                if (!response.ok) {
+                    throw new Error('Failed to fetch products');
+                }
+                const products = await response.json();
+                productsTableBody.innerHTML = '';
+
+                if (products.length === 0) {
+                    productsTableBody.innerHTML = '<tr><td colspan="6" style="text-align: center;">No products found</td></tr>';
+                    return;
+                }
+
+                products.forEach(product => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td class="product-image-cell">
+                            <img src="${API_BASE_URL}${product.imageUrl}" alt="${product.name}" onerror="this.src='https://via.placeholder.com/50'">
+                        </td>
+                        <td>${product.name}</td>
+                        <td>${product.category.charAt(0).toUpperCase() + product.category.slice(1)}</td>
+                        <td class="currency">RS. ${product.price.toFixed(2)}</td>
+                        <td>${product.stock}</td>
+                        <td>
+                            <button class="action-btn edit-btn" data-id="${product._id}"><i class="fas fa-edit"></i></button>
+                            <button class="action-btn delete-btn" data-id="${product._id}"><i class="fas fa-trash"></i></button>
+                        </td>
+                    `;
+                    productsTableBody.appendChild(row);
+                });
+
+                // Add event listeners to edit and delete buttons
+                document.querySelectorAll('.edit-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        const productId = e.target.closest('button').getAttribute('data-id');
+                        openEditProductModal(productId);
+                    });
+                });
+
+                document.querySelectorAll('.delete-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        const productId = e.target.closest('button').getAttribute('data-id');
+                        deleteProduct(productId);
+                    });
+                });
+
+            } catch (error) {
+                console.error('Error fetching products:', error);
+                showAlert('Error fetching products', 'error');
+                productsTableBody.innerHTML = '<tr><td colspan="6" style="text-align: center;">Error loading products</td></tr>';
+            }
+        }
+
+        // Fetch and render orders
+        async function fetchOrders() {
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/orders`);
+                if (!response.ok) {
+                    throw new Error('Failed to fetch orders');
+                }
+                const orders = await response.json();
+                ordersTableBody.innerHTML = '';
+
+                if (orders.length === 0) {
+                    ordersTableBody.innerHTML = '<tr><td colspan="7" style="text-align: center;">No orders found</td></tr>';
+                    return;
+                }
+
+                orders.forEach(order => {
+                    const row = document.createElement('tr');
+                    const orderDate = new Date(order.orderDate).toLocaleDateString();
+                    const statusClass = `status-${order.status.toLowerCase().replace(' ', '-')}`;
+
+                    row.innerHTML = `
+                        <td>${order._id.substring(18)}</td>
+                        <td>${order.customerName}</td>
+                        <td>${orderDate}</td>
+                        <td class="currency">RS. ${order.total.toFixed(2)}</td>
+                        <td><span class="status ${statusClass}">${order.status}</span></td>
+                        <td>
+                            <button class="action-btn view-details-btn" data-id="${order._id}"><i class="fas fa-eye"></i></button>
+                            <select class="status-select" data-id="${order._id}">
+                                <option value="Pending" ${order.status === 'Pending' ? 'selected' : ''}>Pending</option>
+                                <option value="Processing" ${order.status === 'Processing' ? 'selected' : ''}>Processing</option>
+                                <option value="Shipped" ${order.status === 'Shipped' ? 'selected' : ''}>Shipped</option>
+                                <option value="Delivered" ${order.status === 'Delivered' ? 'selected' : ''}>Delivered</option>
+                                <option value="Cancelled" ${order.status === 'Cancelled' ? 'selected' : ''}>Cancelled</option>
+                            </select>
+                            <button class="action-btn update-btn" data-id="${order._id}"><i class="fas fa-sync"></i></button>
+                        </td>
+                    `;
+
+                    const detailsRow = document.createElement('tr');
+                    detailsRow.innerHTML = `
+                        <td colspan="7">
+                            <div class="order-details" id="details-${order._id}">
+                                <h4>Order Details</h4>
+                                <p><strong>Customer:</strong> ${order.customerName} (${order.studentId})</p>
+                                <p><strong>Email:</strong> ${order.customerEmail}</p>
+                                <p><strong>Phone:</strong> ${order.customerPhone}</p>
+                                <p><strong>Delivery Address:</strong> ${order.deliveryAddress}</p>
+                                
+                                <h5>Items:</h5>
+                                ${order.items.map(item => `
+                                    <div class="order-item">
+                                        <span>${item.name} (x${item.quantity})</span>
+                                        <span class="currency">RS. ${(item.price * item.quantity).toFixed(2)}</span>
+                                    </div>
+                                `).join('')}
+                                
+                                <div class="order-total">
+                                    <span>Subtotal:</span>
+                                    <span class="currency">RS. ${order.subtotal.toFixed(2)}</span>
+                                </div>
+                                <div class="order-item">
+                                    <span>Delivery Fee:</span>
+                                    <span class="currency">RS. ${order.deliveryFee.toFixed(2)}</span>
+                                </div>
+                                <div class="order-total">
+                                    <span>Total:</span>
+                                    <span class="currency">RS. ${order.total.toFixed(2)}</span>
+                                </div>
+                            </div>
+                        </td>
+                    `;
+
+                    ordersTableBody.appendChild(row);
+                    ordersTableBody.appendChild(detailsRow);
+                });
+
+                // Add event listeners to view details buttons
+                document.querySelectorAll('.view-details-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        const orderId = e.target.closest('button').getAttribute('data-id');
+                        const detailsDiv = document.getElementById(`details-${orderId}`);
+                        detailsDiv.classList.toggle('active');
+                    });
+                });
+
+                // Add event listeners to update status buttons
+                document.querySelectorAll('.update-btn').forEach(btn => {
+                    btn.addEventListener('click', async (e) => {
+                        const orderId = e.target.closest('button').getAttribute('data-id');
+                        const select = document.querySelector(`.status-select[data-id="${orderId}"]`);
+                        const newStatus = select.value;
+
+                        try {
+                            const response = await fetch(`${API_BASE_URL}/api/orders/${orderId}/status`, {
+                                method: 'PATCH',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify({ status: newStatus })
+                            });
+
+                            if (response.ok) {
+                                showAlert('Order status updated successfully');
+                                fetchOrders(); // Refresh orders list
+                            } else {
+                                const result = await response.json();
+                                showAlert(result.error || 'Failed to update order status', 'error');
+                            }
+                        } catch (error) {
+                            console.error('Error updating order status:', error);
+                            showAlert('Error updating order status', 'error');
+                        }
+                    });
+                });
+
+            } catch (error) {
+                console.error('Error fetching orders:', error);
+                showAlert('Error fetching orders', 'error');
+                ordersTableBody.innerHTML = '<tr><td colspan="7" style="text-align: center;">Error loading orders</td></tr>';
+            }
+        }
+
+
+        async function fetchPayments() {
+            try {
+                console.log('Attempting to fetch payments from:', `${API_BASE_URL}/api/payments`);
+
+                const response = await fetch(`${API_BASE_URL}/api/payments`, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        // Add authorization if needed:
+                        // 'Authorization': `Bearer ${yourAuthToken}`
+                    }
+                });
+
+                console.log('Response status:', response.status);
+
+                if (!response.ok) {
+                    const errorData = await response.json().catch(() => null);
+                    console.error('Error response data:', errorData);
+                    throw new Error(`Failed to fetch payments: ${response.status} ${response.statusText}`);
+                }
+
+                const payments = await response.json();
+                console.log('Received payments data:', payments);
+
+                paymentsTableBody.innerHTML = '';
+
+                if (payments.length === 0) {
+                    paymentsTableBody.innerHTML = '<tr><td colspan="6" style="text-align: center;">No payments found</td></tr>';
+                    return;
+                }
+
+                payments.forEach(payment => {
+                    const paymentDate = new Date(payment.paymentDate).toLocaleString();
+                    const statusClass = `status-${payment.status.toLowerCase().replace(' ', '-')}`;
+                    const maskedCardNumber = payment.paymentMethod === 'card' && payment.cardDetails?.number
+                        ? `**** **** **** ${payment.cardDetails.number.slice(-4)}`
+                        : 'N/A';
+
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                <td>${payment._id.substring(18)}</td>
+                <td>${payment.orderId.substring(18)}</td>
+                <td class="currency">RS. ${payment.amount.toFixed(2)}</td>
+                <td>${paymentDate}</td>
+                <td>${payment.paymentMethod === 'card' ? 'Credit Card' : 'Cash on Delivery'}</td>
+                <td><span class="status ${statusClass}">${payment.status.charAt(0).toUpperCase() + payment.status.slice(1)}</span></td>
+            `;
+                    paymentsTableBody.appendChild(row);
+                });
+            } catch (error) {
+                console.error('Error fetching payments:', error);
+                showAlert(`Error fetching payments: ${error.message}`, 'error');
+                paymentsTableBody.innerHTML = '<tr><td colspan="6" style="text-align: center;">Error loading payments</td></tr>';
+            }
+        }
+
+        // Delete product function
+        async function deleteProduct(productId) {
+            if (confirm('Are you sure you want to delete this product?')) {
+                try {
+                    const response = await fetch(`${API_BASE_URL}/api/products/${productId}`, {
+                        method: 'DELETE'
+                    });
+
+                    if (response.ok) {
+                        showAlert('Product deleted successfully');
+                        fetchProducts(); // Refresh product list
+                    } else {
+                        const result = await response.json();
+                        showAlert(result.error || 'Failed to delete product', 'error');
+                    }
+                } catch (error) {
+                    console.error('Error deleting product:', error);
+                    showAlert('Error deleting product', 'error');
+                }
+            }
+        }
+        // Add this to your dashboard script
+        document.getElementById('editProductForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            const productId = document.getElementById('editProductId').value;
+            const formData = new FormData();
+            formData.append('name', document.getElementById('editProductName').value);
+            formData.append('category', document.getElementById('editProductCategory').value);
+            formData.append('price', document.getElementById('editProductPrice').value);
+            formData.append('stock', document.getElementById('editProductStock').value);
+            formData.append('description', document.getElementById('editProductDescription').value);
+
+            const imageFile = document.getElementById('editProductImage').files[0];
+            if (imageFile) {
+                formData.append('image', imageFile);
+            }
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/products/${productId}`, {
+                    method: 'PUT',
+                    body: formData
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    showAlert('Product updated successfully!');
+                    editProductModal.style.display = 'none';
+                    fetchProducts(); // Refresh product list
+                } else {
+                    showAlert(result.error || 'Failed to update product', 'error');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                showAlert('Error updating product. Please try again.', 'error');
+            }
+        });
+
+        // Logout functionality
+        document.querySelector('.logout-btn').addEventListener('click', function () {
+            if (confirm('Are you sure you want to logout?')) {
+                // Clear any session data or tokens here
+                window.location.href = 'login.html';
+            }
+        });
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', () => {
+            fetchProducts();
+
+            // Set dashboard as default view
+            document.getElementById('dashboard-tab').click();
+        });
+
+    </script>
+</body>
+
+</html>

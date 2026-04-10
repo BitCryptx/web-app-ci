@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shipping Policy - Campus Tuck</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2E7D32;
+            --primary-light: #4CAF50;
+            --secondary: #FFC107;
+            --dark: #1B5E20;
+            --light: #F1F8E9;
+            --text: #333333;
+            --gray: #E0E0E0;
+            --white: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #f9f9f9;
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Pacifico', cursive;
+            font-size: 28px;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.03);
+        }
+
+        .logo i {
+            margin-right: 10px;
+            color: var(--primary-light);
+            font-size: 24px;
+        }
+
+        /* Navigation Menu */
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-item {
+            margin-left: 25px;
+            position: relative;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            padding: 8px 0;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-light);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-light);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link i {
+            margin-right: 8px;
+            font-size: 18px;
+        }
+
+        /* Auth Buttons */
+        .auth-buttons {
+            display: flex;
+            align-items: center;
+        }
+
+        .auth-btn {
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-weight: 500;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            margin-left: 15px;
+        }
+
+        .auth-btn i {
+            margin-right: 8px;
+            font-size: 16px;
+        }
+
+        .btn-outline {
+            border: 2px solid var(--primary-light);
+            color: var(--primary-light);
+            background: transparent;
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary-light);
+            color: var(--white);
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
+        }
+
+        .btn-solid {
+            background-color: var(--primary-light);
+            color: var(--white);
+            border: 2px solid var(--primary-light);
+        }
+
+        .btn-solid:hover {
+            background-color: var(--dark);
+            border-color: var(--dark);
+            box-shadow: 0 5px 15px rgba(46, 125, 50, 0.3);
+        }
+
+        /* Shipping Content */
+        .shipping-container {
+            max-width: 1000px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+
+        .shipping-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .shipping-header h1 {
+            font-size: 36px;
+            color: var(--primary);
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .shipping-header h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--primary-light);
+            border-radius: 3px;
+        }
+
+        .shipping-header p {
+            color: #666;
+            font-size: 16px;
+        }
+
+        .shipping-content {
+            background-color: var(--white);
+            border-radius: 10px;
+            padding: 40px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .shipping-section {
+            margin-bottom: 30px;
+        }
+
+        .shipping-section h2 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 22px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .shipping-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--primary-light);
+        }
+
+        .shipping-section p,
+        .shipping-section ul {
+            margin-bottom: 15px;
+            color: #555;
+            font-size: 15px;
+        }
+
+        .shipping-section ul {
+            padding-left: 20px;
+        }
+
+        .shipping-section li {
+            margin-bottom: 8px;
+        }
+
+        .highlight {
+            background-color: rgba(76, 175, 80, 0.1);
+            padding: 15px;
+            border-left: 3px solid var(--primary-light);
+            margin: 20px 0;
+            border-radius: 0 5px 5px 0;
+        }
+
+        .shipping-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .shipping-table th,
+        .shipping-table td {
+            border: 1px solid var(--gray);
+            padding: 12px;
+            text-align: left;
+        }
+
+        .shipping-table th {
+            background-color: var(--light);
+            color: var(--primary);
+        }
+
+        .shipping-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        /* Timeline for shipping process */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 30px auto;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 3px;
+            background-color: var(--primary-light);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -1.5px;
+        }
+
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: var(--white);
+            border: 3px solid var(--primary-light);
+            border-radius: 50%;
+            top: 15px;
+            z-index: 1;
+        }
+
+        .left {
+            left: 0;
+        }
+
+        .right {
+            left: 50%;
+        }
+
+        .left::after {
+            right: -10px;
+        }
+
+        .right::after {
+            left: -10px;
+        }
+
+        .timeline-content {
+            padding: 20px;
+            background-color: var(--white);
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .timeline-content h3 {
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: var(--white);
+            padding: 60px 20px 30px;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+        }
+
+        .footer-col h3 {
+            font-size: 20px;
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--primary-light);
+        }
+
+        .footer-about .logo {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: var(--white);
+        }
+
+        .footer-about p {
+            margin-bottom: 20px;
+            opacity: 0.8;
+            font-size: 14px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: var(--white);
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background-color: var(--primary-light);
+            transform: translateY(-3px);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 15px;
+        }
+
+        .footer-links a {
+            color: var(--white);
+            opacity: 0.8;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+            padding-left: 5px;
+        }
+
+        .footer-links a i {
+            margin-right: 10px;
+            font-size: 14px;
+        }
+
+        .footer-contact p {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            opacity: 0.8;
+            font-size: 14px;
+        }
+
+        .footer-contact p i {
+            margin-right: 10px;
+            color: var(--primary-light);
+            font-size: 16px;
+            width: 20px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            margin-top: 50px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.7;
+            font-size: 14px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .shipping-header h1 {
+                font-size: 28px;
+            }
+
+            .shipping-content {
+                padding: 25px;
+            }
+
+            .shipping-section h2 {
+                font-size: 20px;
+            }
+
+            .shipping-table {
+                display: block;
+                overflow-x: auto;
+            }
+
+            .timeline::after {
+                left: 31px;
+            }
+
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+
+            .timeline-item::after {
+                left: 21px;
+            }
+
+            .left::after,
+            .right::after {
+                left: 21px;
+            }
+
+            .right {
+                left: 0%;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .shipping-header h1 {
+                font-size: 24px;
+            }
+
+            .shipping-content {
+                padding: 20px;
+            }
+
+            .nav-menu {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .nav-item {
+                margin: 5px 10px;
+            }
+
+            .auth-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .auth-btn {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="nav-container">
+            <a href="../../index.html" class="logo">
+                <i class="fas fa-store"></i>
+                Campus Tuck
+            </a>
+
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="products.html" class="nav-link">
+                        <i class="fas fa-bars"></i>
+                        Products
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="products.html" class="nav-link">
+                        <i class="fas fa-fire"></i>
+                        Special Offers
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="aboutus.html" class="nav-link">
+                        <i class="fas fa-info-circle"></i>
+                        About Us
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="contact.html" class="nav-link">
+                        <i class="fas fa-phone"></i>
+                        Contact
+                    </a>
+                </li>
+            </ul>
+
+            <div class="auth-buttons">
+                <button class="auth-btn btn-outline" onclick="window.location.href='user.html'">
+                    <i class="fas fa-user"></i>
+                    User Login
+                </button>
+                <button class="auth-btn btn-solid" onclick="window.location.href='adminlogin.html'">
+                    <i class="fas fa-user-shield"></i>
+                    Admin
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Shipping Content -->
+    <div class="shipping-container">
+        <div class="shipping-header">
+            <h1>Shipping Policy</h1>
+            <p>Last Updated: June 16, 2025</p>
+        </div>
+
+        <div class="shipping-content">
+            <div class="shipping-section">
+                <h2>1. Overview</h2>
+                <p>At Campus Tuck, we strive to provide efficient and reliable shipping services to our campus
+                    community. This policy outlines our shipping methods, delivery times, fees, and other important
+                    information regarding the delivery of your orders.</p>
+
+                <div class="highlight">
+                    <p><strong>Note:</strong> Our shipping services are currently available only within the campus
+                        premises and select nearby student housing areas.</p>
+                </div>
+            </div>
+
+            <div class="shipping-section">
+                <h2>2. Shipping Methods & Delivery Times</h2>
+                <p>We offer the following shipping options tailored to campus needs:</p>
+
+                <table class="shipping-table">
+                    <tr>
+                        <th>Service</th>
+                        <th>Delivery Time</th>
+                        <th>Description</th>
+                        <th>Fee</th>
+                    </tr>
+                    <tr>
+                        <td>Standard Campus Delivery</td>
+                        <td>1-2 business days</td>
+                        <td>Delivery to dorm rooms or campus buildings</td>
+                        <td>Rs. 50</td>
+                    </tr>
+                    <tr>
+                        <td>Express Delivery</td>
+                        <td>Same day (if ordered before 3PM)</td>
+                        <td>Priority handling for urgent needs</td>
+                        <td>Rs. 100</td>
+                    </tr>
+                    <tr>
+                        <td>Pickup Station</td>
+                        <td>Ready in 4 hours</td>
+                        <td>Collect from our campus store</td>
+                        <td>Free</td>
+                    </tr>
+                    <tr>
+                        <td>Classroom Delivery</td>
+                        <td>Scheduled between classes</td>
+                        <td>Delivery to your classroom between lectures</td>
+                        <td>Rs. 75</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="shipping-section">
+                <h2>3. Order Processing</h2>
+                <p>Here's what happens after you place an order:</p>
+
+                <div class="timeline">
+                    <div class="timeline-item left">
+                        <div class="timeline-content">
+                            <h3>Order Received</h3>
+                            <p>We confirm your order via email/SMS within 15 minutes of placement.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item right">
+                        <div class="timeline-content">
+                            <h3>Processing</h3>
+                            <p>Our team prepares your items within 2 hours for standard orders, or immediately for
+                                express orders.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item left">
+                        <div class="timeline-content">
+                            <h3>Quality Check</h3>
+                            <p>Every order undergoes a final quality check before dispatch.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item right">
+                        <div class="timeline-content">
+                            <h3>Dispatch</h3>
+                            <p>Your order is assigned to a delivery agent with real-time tracking available.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item left">
+                        <div class="timeline-content">
+                            <h3>Delivery</h3>
+                            <p>Our agent delivers to your specified location and confirms completion.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="shipping-section">
+                <h2>4. Delivery Areas & Restrictions</h2>
+                <p>We currently serve:</p>
+                <ul>
+                    <li>All campus dormitories and residential halls</li>
+                    <li>Academic buildings during operating hours</li>
+                    <li>Designated pickup points across campus</li>
+                    <li>Approved off-campus student housing within 2km radius</li>
+                </ul>
+                <p>Restrictions:</p>
+                <ul>
+                    <li>No deliveries during final exam weeks to academic buildings</li>
+                    <li>Limited delivery hours in residential halls (8AM-10PM)</li>
+                    <li>Certain fragile items may have restricted delivery locations</li>
+                </ul>
+            </div>
+
+            <div class="shipping-section">
+                <h2>5. Shipping Fees & Free Shipping</h2>
+                <p>Our shipping fees are structured to cover our campus delivery operations:</p>
+                <ul>
+                    <li><strong>Free Shipping:</strong> Available for orders over Rs. 1000 or for members of our loyalty
+                        program</li>
+                    <li><strong>Special Discounts:</strong> 50% off shipping for bulk orders from student organizations
+                    </li>
+                    <li><strong>Subscription:</strong> Monthly unlimited shipping pass available for Rs. 300</li>
+                </ul>
+                <p>All fees are clearly displayed during checkout before payment.</p>
+            </div>
+
+            <div class="shipping-section">
+                <h2>6. Tracking Your Order</h2>
+                <p>We provide multiple ways to track your order:</p>
+                <ul>
+                    <li><strong>Real-time Map Tracking:</strong> Follow your delivery agent's location in our app</li>
+                    <li><strong>SMS Updates:</strong> Automatic notifications at key stages</li>
+                    <li><strong>Order Portal:</strong> Check status anytime on our website</li>
+                    <li><strong>Customer Service:</strong> Call or chat with our team for updates</li>
+                </ul>
+            </div>
+
+            <div class="shipping-section">
+                <h2>7. Delivery Issues & Failed Deliveries</h2>
+                <p>If we encounter issues delivering your order:</p>
+                <ul>
+                    <li>Three delivery attempts will be made for each order</li>
+                    <li>After failed attempts, items will be held at our campus store for 3 days</li>
+                    <li>Unclaimed orders will be returned and refunded (minus shipping fees)</li>
+                    <li>Incorrect addresses may incur a redelivery fee</li>
+                </ul>
+                <div class="highlight">
+                    <p><strong>Pro Tip:</strong> Ensure your campus location details are accurate and include building
+                        names, room numbers, or specific landmarks to help our delivery team.</p>
+                </div>
+            </div>
+
+            <div class="shipping-section">
+                <h2>8. Holiday & Special Event Shipping</h2>
+                <p>During these periods, please note:</p>
+                <ul>
+                    <li>Reduced delivery hours during campus holidays</li>
+                    <li>Extended processing times during orientation week and finals</li>
+                    <li>Special delivery arrangements available for campus events (request 48 hours in advance)</li>
+                    <li>No deliveries on official campus closure days</li>
+                </ul>
+            </div>
+
+            <div class="shipping-section">
+                <h2>9. International Shipping</h2>
+                <p>Currently, we only offer shipping within the campus vicinity and nearby approved student housing. For
+                    international shipping needs, please contact our special services team at shipping@campustuck.edu.
+                </p>
+            </div>
+
+            <div class="shipping-section">
+                <h2>10. Contact Shipping Support</h2>
+                <p>For shipping-related inquiries:</p>
+                <ul>
+                    <li><strong>Email:</strong> shipping@campustuck.edu</li>
+                    <li><strong>Phone:</strong> 0315-1622934 (Ext. 103)</li>
+                    <li><strong>In-Person:</strong> Visit our campus store shipping desk</li>
+                    <li><strong>Hours:</strong> Monday-Saturday, 9AM-5PM</li>
+                </ul>
+                <p>For urgent delivery issues during operations, contact our dispatch team directly at +92 315 162 2934.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-col footer-about">
+                <div class="logo">
+                    <i class="fas fa-store"></i>
+                    Campus Tuck
+                </div>
+                <p>Your one-stop shop for all campus essentials, providing quality products with quick service to the
+                    student community.</p>
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="../../index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+                    <li><a href="products.html"><i class="fas fa-chevron-right"></i> Products</a></li>
+                    <li><a href="products.html"><i class="fas fa-chevron-right"></i> Special Offers</a></li>
+                    <li><a href="aboutus.html"><i class="fas fa-chevron-right"></i> About Us</a></li>
+                    <li><a href="contact.html"><i class="fas fa-chevron-right"></i> Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h3>Legal</h3>
+                <ul class="footer-links">
+                    <li><a href="term&condition.html"><i class="fas fa-chevron-right"></i> Terms & Conditions</a></li>
+                    <li><a href="privacy&policy.html"><i class="fas fa-chevron-right"></i> Privacy Policy</a></li>
+                    <li><a href="refundspolicy.html"><i class="fas fa-chevron-right"></i> Refund Policy</a></li>
+                    <li><a href="shippingpolicy.html"><i class="fas fa-chevron-right"></i> Shipping Policy</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col footer-contact">
+                <h3>Contact Us</h3>
+                <p><i class="fas fa-map-marker-alt"></i> Campus Building A, Room 101</p>
+                <p><i class="fas fa-phone"></i> 03151622934</p>
+                <p><i class="fas fa-envelope"></i> info@campustuck.edu</p>
+                <p><i class="fas fa-clock"></i> Mon-Fri: 8AM-8PM</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            &copy; 2025 Campus Tuck. All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+        // Simple script for smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
