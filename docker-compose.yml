@@ -7,7 +7,7 @@ services:
     volumes:
       - .:/app
     ports:
-      - "3001:3000"
+      - "3001:8080"
     command: sh -c "npm install && node server.js"
     environment:
       - MONGODB_URI=mongodb+srv://musharafulislam333_db_user:musharafulislam333_db_user@cluster0.el4hzeg.mongodb.net/mydb
