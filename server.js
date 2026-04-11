@@ -10,6 +10,7 @@ const bcrypt = require('bcrypt');
  
 // const database = require('./database');
 const saltRounds = 10;
+// port 
 
 const port = 8080;
 const app = express();
