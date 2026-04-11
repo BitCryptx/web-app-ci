@@ -1,21 +1,25 @@
 version: '3.8'
-
 services:
   app:
-    build: .
-    image: musharaf1234/website:latest
+    image: node:18-alpine
+    container_name: webapp_part2
+    working_dir: /app
+    volumes:
+      - .:/app
     ports:
-      - "80:3000"
+      - "3001:3000"
+    command: sh -c "npm install && node server.js"
     environment:
       - MONGODB_URI=mongodb+srv://musharafulislam333_db_user:musharafulislam333_db_user@cluster0.el4hzeg.mongodb.net/mydb
-    depends_on:
-      - mongo
     restart: always
 
   mongo:
     image: mongo:6.0
+    container_name: mongodb_part2
     volumes:
       - mongo-data:/data/db
+    ports:
+      - "27018:27017"
     restart: always
 
 volumes:
